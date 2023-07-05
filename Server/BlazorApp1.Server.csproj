@@ -29,9 +29,5 @@
     <ProjectReference Include="..\Shared\BlazorApp1.Shared.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Services\Interfaces\" />
-  </ItemGroup>
-
 
 </Project>
