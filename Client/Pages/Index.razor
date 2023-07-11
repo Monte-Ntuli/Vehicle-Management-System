@@ -1,9 +1,37 @@
-﻿@page "/"
+﻿@page "/Login"
+@inject NavigationManager navMan;
 
-<PageTitle>Index</PageTitle>
+<div class="align-content-center; container-sm">
+    <img class="mb-4" src="images/firsttechlogo.png" alt="" width="200" height="200">
+    <form>
 
-<h1>Hello, world!</h1>
+        <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
 
-Welcome to your new app.
+        <div class="form-floating">
+            <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+            <label for="floatingInput">Email address</label>
+        </div>
+        <br />
+        <div class="form-floating">
+            <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+            <label for="floatingPassword">Password</label>
+        </div>
+        <br />
+        <a>Forgot password ? </a>
+        <br />
+        <br />
+        <button class="w-100 btn btn-lg btn-warning" type="submit" @onclick="GotoRegister">Register</button>
+        <br />
+        <br />
+        <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
 
-<SurveyPrompt Title="How is Blazor working for you?" />
+    </form>
+</div>
+
+@code {
+
+    void GotoRegister()
+    {
+        navMan.NavigateTo("Register");
+    }
+}

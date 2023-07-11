@@ -1,0 +1,66 @@
+﻿@page "/Register"
+@layout EmptyLayout
+@inherits AccountBase;
+@using MudBlazor
+
+
+<MudCard Class="align-content-center; container-sm">
+    <img class="mb-4" src="images/firsttechlogo.png" alt="" width="200" height="200">
+    <MudForm @bind-Errors="@errors">
+
+
+        <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+
+        <MudItem Class="form-floating">
+            <MudTextField Label="Name" Class="form-control" Required="true" RequiredError="Name is required!"
+            @bind-Value="employee.FirstName" For="@(() => employee.FirstName)" Placeholder="John" InputType="InputType.Text" />
+        </MudItem>
+        <br />
+        <MudItem Class="form-floating">
+            <MudTextField Label="Last name" Class="form-control" Required="true" RequiredError="Last name is required!"
+            @bind-Value="employee.LastName" For="@(() => employee.LastName)" Placeholder="Doe" InputType="InputType.Text" />
+        </MudItem>
+        <br />
+        <MudItem Class="form-floating">
+            <MudTextField Label="Email address" Class="form-control" Required="true" RequiredError="Email is required!"
+            @bind-Value="employee.Email" For="@(() => employee.Email)" Placeholder="johndoe@example.com" InputType="InputType.Email" />
+        </MudItem>
+        <br />
+        <MudItem Class="form-floating">
+            <MudTextField Label="Confirm Email address" Class="form-control" Required="true" RequiredError="Please confirm email!"
+            @bind-Value="confirmEmail" For="@(() => confirmEmail)" Placeholder="johndoe@example.com" InputType="InputType.Email" />
+        </MudItem>
+        <br />
+        <MudItem Class="form-floating">
+            <MudTextField Label="Phone Number" Class="form-control" Required="true" RequiredError="Phone Number is required!"
+            @bind-Value="employee.PhoneNum" For="@(() => employee.PhoneNum)" Placeholder="082 123 4567" InputType="InputType.Number" />
+        </MudItem>
+        <br />
+        <MudItem Class="form-floating">
+            <MudTextField Label="Password" Class="form-control" Required="true" RequiredError="Password is required!"
+            @bind-Value="confirmPassword" For="@(() => confirmPassword)" Placeholder="Password" InputType="InputType.Password" />
+        </MudItem>
+        <br />
+        <MudItem Class="form-floating">
+            <MudTextField Label="Confirm Password" Class="form-control" Required="true" RequiredError="Please confirm password!"
+            @bind-Value="employee.Password" For="@(() => employee.Password)" Placeholder="Password" InputType="InputType.Password" />
+        </MudItem>
+        <br />
+        <MudItem Class="form-floating">
+            <MudTextField Label="Company Name" Class="form-control" Required="true" RequiredError="Company name is required!"
+            @bind-Value="employee.Company" For="@(() => employee.Company)" Placeholder="Company" InputType="InputType.Text" />
+        </MudItem>
+        <br />
+        <br />
+        <button class="w-100 btn btn-lg btn-warning" type="submit" @onclick="Register">Register</button>
+        <br />
+        <br />
+    </MudForm>
+    <br />
+</MudCard>
+
+@code {
+    string[] errors = { };
+    MudTextField<string> pwField1;
+    MudForm form;
+}

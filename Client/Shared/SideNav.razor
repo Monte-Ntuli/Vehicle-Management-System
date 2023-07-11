@@ -1,0 +1,91 @@
+﻿@page "/SideNav"
+@inject NavigationManager navMan;
+
+<div class="d-flex flex-column flex-shrink-0 p-3 " style="width: 280px;">
+    <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-black text-decoration-none">
+        <img src="iCONS/dashboard_FILL0_wght400_GRAD0_opsz48.png" alt="" width="32" height="32" class="rounded-circle">
+        <span class="fs-4"> APPLICATIONS</span>
+    </a>
+    <hr>
+    <ul class="nav nav-pills flex-column mb-auto shadow">
+        <!-- This is the Home Button -->
+        <li class="nav-item">
+            <a href="Dashboard" class="nav-link text-black link-dark">
+                <img src="iCONS/home_FILL0_wght400_GRAD0_opsz48.png" alt="" width="32" height="32" class="rounded-circle">
+                Home
+            </a>
+        </li>
+        <!-- This is the Schedules Button -->
+        <li class="nav-item">
+            <a href="SchedulesDashboard" class="nav-link text-black link-dark">
+                <img src="iCONS/calendar_month_FILL0_wght400_GRAD0_opsz48.png" alt="" width="32" height="32" class="rounded-circle">
+                Schedules
+            </a>
+        </li>
+        <!-- This is the Reports Button -->
+        <li>
+            <a href="ReportsDashboard" class="nav-link text-black">
+                <img src="iCONS/assignment_late_FILL0_wght400_GRAD0_opsz48.png" alt="" width="32" height="32" class="rounded-circle">
+                Reports
+            </a>
+        </li>
+        <!-- This is the Questionaires Button -->
+        <li>
+            <a href="QuestionairesDashboard" class="nav-link text-black">
+                <img src="iCONS/assignment_FILL0_wght400_GRAD0_opsz48.png" alt="" width="32" height="32" class="rounded-circle">
+                Questionaires
+            </a>
+        </li>
+        <!-- This is the Employees Button -->
+        <li>
+            <a href="EmployeeDashboard" class="nav-link text-black">
+                <img src="iCONS/supervisor_account_FILL0_wght400_GRAD0_opsz48.png" alt="" width="32" height="32" class="rounded-circle">
+                Employees
+            </a>
+        </li>
+        <!-- This is the Vehicles Button -->
+        <li>
+            <a href="VehiclesDashboard" class="nav-link text-black">
+                <img src="iCONS/local_shipping_FILL0_wght400_GRAD0_opsz48.png" alt="" width="32" height="32" class="rounded-circle">
+                Vehicles
+            </a>
+        </li>
+        <!-- This is the Vehicle Types Button-->
+        <li>
+            <a href="VehicleTypesDashboard" class="nav-link text-black">
+                <img src="iCONS/car_crash_FILL0_wght400_GRAD0_opsz48.png" alt="" width="32" height="32" class="rounded-circle">
+                Vehicle Types
+            </a>
+        </li>
+        <!-- This is the Vehicle Model Types Button-->
+        <li>
+            <a href="VehicleModelTypeDashboard" class="nav-link text-black">
+                <img src="iCONS/taxi_alert_FILL0_wght400_GRAD0_opsz48.png" alt="" width="32" height="32" class="rounded-circle">
+                Vehicle Make
+            </a>
+        </li>
+        <!-- This is the Customers Button -->
+        <li>
+            <a href="CustomersDashboard" class="nav-link text-black">
+                <img src="iCONS/supervisor_account_FILL0_wght400_GRAD0_opsz48.png" alt="" width="32" height="32" class="rounded-circle">
+                Customers
+            </a>
+        </li>
+        <!-- This is the Sign Out Button -->
+        <li>
+            <a href="#" class="nav-link text-black" @onclick="GotoSignIn">
+                <img src="iCONS/exit_to_app_FILL0_wght400_GRAD0_opsz48.png" alt="" width="32" height="32" class="rounded-circle">
+                Sign Out
+            </a>
+        </li>
+    </ul>
+    <hr>
+</div>
+
+
+@code {
+    void GotoSignIn()
+    {
+        navMan.NavigateTo("/");
+    }
+}

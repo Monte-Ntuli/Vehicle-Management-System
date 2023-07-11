@@ -1,17 +1,30 @@
-﻿@inherits LayoutComponentBase
+﻿@using MudBlazor
+@inherits LayoutComponentBase
 
 <div class="page">
-    <div class="sidebar">
-        <NavMenu />
-    </div>
-
+    <MudThemeProvider />
+    <MudDialogProvider />
+    <MudSnackbarProvider />
+    <!-- This is the Header -->
+    <TopNav />
     <main>
-        <div class="top-row px-4">
-            <a href="https://docs.microsoft.com/aspnet/" target="_blank">About</a>
-        </div>
+        <div class="row">
 
-        <article class="content px-4">
-            @Body
-        </article>
+            <!-- This is the Sidebar/SideNav-->
+            <div class="col-3">
+                <SideNav />
+            </div>
+
+            <!-- This is the main page content -->
+            <div class="col-8">
+                <div class="main-body">
+                    @Body
+                </div>
+            </div>
+        </div>
     </main>
+    <!-- This is the Footer -->
+    <div class="footer">
+        <Footer />
+    </div>
 </div>
