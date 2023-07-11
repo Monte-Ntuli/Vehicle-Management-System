@@ -1,6 +1,6 @@
 ﻿using BlazorApp1.Client.Repos.Interfaces;
 using BlazorApp1.Server.Entities;
-using BlazorApp1.Shared.RequestModels;
+using BlazorApp1.Shared.AppUserDTO;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -27,7 +27,7 @@ namespace BlazorApp1.Client.Repos
             if (user == null) { return null; }
             else return user;
         }
-        public async Task<EmployeeEntity> Login(LoginUserRM userEntity)
+        public async Task<EmployeeEntity> Login(LoginDTO userEntity)
         {
             var user = await _dbContext.Employees.FirstOrDefaultAsync(x => x.Email == userEntity.Email);
             if (user != null)

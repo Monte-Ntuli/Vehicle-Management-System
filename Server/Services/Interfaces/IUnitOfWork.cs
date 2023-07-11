@@ -9,6 +9,6 @@ namespace BlazorApp1.Client.Services.Interfaces
         IVehicleTypeRepository VehicleType { get; }
         IVehicleRepository Vehicle { get; }
         IQuestionsRepository Questions { get; }
-        IVehicleModelTypeRepository VehicleModelType { get; }
+        IVehicleMakeRepository VehicleMake { get; }
     }
 }

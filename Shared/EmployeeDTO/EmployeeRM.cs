@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace BlazorApp1.Shared.RequestModels
+namespace BlazorApp1.Shared.EmployeeDTO
 {
     public class EmployeeRM
     {

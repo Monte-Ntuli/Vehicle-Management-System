@@ -1,13 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
-
-namespace BlazorApp1.Server.Entities
+﻿namespace BlazorApp1.Server.Models
 {
-    public class AddressEntity
+    public class AddressModel
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public Guid Id { get; set; }
         public int UserID { get; set; }
         public string Email { get; set; }
         public string ComplexName { get; set; }

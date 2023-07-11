@@ -30,7 +30,7 @@ namespace BlazorApp1.Client.Services
         #region change password
         public async Task ChangePassword(LoginDTO loginDTO)
         {
-            var result = await _httpClient.PostAsJsonAsync("AppUser/ChangePassword/", loginDTO);
+            var result = await _httpClient.PostAsJsonAsync("api/AppUser/ChangePassword/", loginDTO);
             var response = result.StatusCode;
 
             if (response == System.Net.HttpStatusCode.Accepted)
@@ -48,7 +48,7 @@ namespace BlazorApp1.Client.Services
         #region forgot password
         public async Task ForgotPassword(LoginDTO loginDTO)
         {
-            var result = await _httpClient.PostAsJsonAsync("AppUser/ForgotPassword/", loginDTO);
+            var result = await _httpClient.PostAsJsonAsync("api/AppUser/ForgotPassword/", loginDTO);
             var response = result.StatusCode;
 
             if (response == System.Net.HttpStatusCode.Accepted)
@@ -65,7 +65,7 @@ namespace BlazorApp1.Client.Services
 
         public async Task FindEmail(FindEmailDTO findEmailDTO)
         {
-            var result = await _httpClient.PostAsJsonAsync("AppUser/FindEmail", findEmailDTO);
+            var result = await _httpClient.PostAsJsonAsync("api/AppUser/FindEmail", findEmailDTO);
             var response = result.StatusCode;
 
             if (response == System.Net.HttpStatusCode.Accepted)
@@ -83,7 +83,7 @@ namespace BlazorApp1.Client.Services
         #region Register new account
         public async Task Register(EmployeeDTO appUser)
         {
-            var result = await _httpClient.PostAsJsonAsync("AppUser/Register", appUser);
+            var result = await _httpClient.PostAsJsonAsync("api/AppUser/Register", appUser);
 
             var response = result.StatusCode;
             if (response != System.Net.HttpStatusCode.Accepted)
@@ -102,7 +102,7 @@ namespace BlazorApp1.Client.Services
         #region Login
         public async Task Login(LoginDTO loginDTO)
         {
-            var result = await _httpClient.PostAsJsonAsync("AppUser/Login", loginDTO);
+            var result = await _httpClient.PostAsJsonAsync("api/AppUser/Login", loginDTO);
             var response = result.StatusCode;
             if (response != System.Net.HttpStatusCode.Accepted)
             {
@@ -122,7 +122,7 @@ namespace BlazorApp1.Client.Services
         #region Get Admin Details
         public async Task<AppUserDTO> GetUserByEmailTest(string email)
         {
-            var result = await _httpClient.GetFromJsonAsync<AppUserDTO>($"AppUser/GetUserByEmail/" + email);
+            var result = await _httpClient.GetFromJsonAsync<AppUserDTO>($"api/AppUser/GetUserByEmail/" + email);
             return result;
         }
         #endregion

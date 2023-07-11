@@ -5,7 +5,7 @@ namespace BlazorApp1.Server.Entities
 {
     public class AppUser:IdentityUser
     {
-        //public int AdminID { get; set; }
+        public int UserID { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Role { get; set; }

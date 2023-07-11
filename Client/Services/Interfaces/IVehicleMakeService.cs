@@ -1,6 +1,6 @@
 ﻿namespace BlazorApp1.Client.Services.Interfaces
 {
-    public interface IVehicleModelTypeService
+    public interface IVehicleMakeService
     {
     }
 }

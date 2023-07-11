@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BlazorApp1.Shared.VehicleModelTypeDTO
+namespace BlazorApp1.Shared.VehicleMakeDTO
 { 
-    public class CreateVehicleModelTypeDTO
+    public class CreateVehicleMakeDTO
     {
         public string VehicleModelTitle { get; set; }
         public string Company { get; set; }

@@ -1,5 +1,5 @@
 ﻿using BlazorApp1.Server.Entities;
-using BlazorApp1.Shared.RequestModels;
+using BlazorApp1.Shared.AppUserDTO;
 
 namespace BlazorApp1.Client.Repos.Interfaces
 {
@@ -11,7 +11,7 @@ namespace BlazorApp1.Client.Repos.Interfaces
         Task<bool> DeleteEmployeeAsync(int employee);
         Task<bool> RestoreEmployeeAsync(int employee);
         //Task<string> Login(LoginUserRM userEntity);
-        Task<EmployeeEntity> Login(LoginUserRM userEntity);
+        Task<EmployeeEntity> Login(LoginDTO userEntity);
         Task<List<EmployeeEntity>> GetEmployeeByEmailAsync(string email);
         Task<List<EmployeeEntity>> GetEmployeeByCompanyAsync(string company);
         Task<List<EmployeeEntity>> GetEmployeeByRoleAsync(string role);

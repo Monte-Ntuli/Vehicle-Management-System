@@ -1,4 +1,6 @@
-﻿using BlazorApp1.Server.Entities;
+﻿using BlazorApp1.Client.Services.Interfaces;
+using BlazorApp1.Client.Services;
+using BlazorApp1.Server.Entities;
 using BlazorApp1.Server.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
@@ -46,6 +48,9 @@ namespace BlazorApp1.Server
             //{
             //    c.SwaggerDoc("v1", new OpenApiInfo { Title = "projectBackend", Version = "v1" });
             //});
+
+            services.AddAutoMapper(typeof(MappingProfile));
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
             {

@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace BlazorApp1.Shared.VehicleModelTypeDTO
 {
-    public class VehicleModelTypeDTO
+    public class VehicleMakeDTO
     {
-        public int VehicleModelTypeID { get; set; }
-        public string VehicleModelTitle { get; set; }
+        public int VehicleMakeID { get; set; }
+        public string VehicleMakeTitle { get; set; }
         public string Company { get; set; }
         public bool isDeleted { get; set; }
     }

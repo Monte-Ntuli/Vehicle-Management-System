@@ -69,14 +69,15 @@ namespace BlazorApp1.Client.Services
             }
         }
 
-        public IVehicleModelTypeRepository _vehicleModelType;
-        public IVehicleModelTypeRepository VehicleModelType
+        public IVehicleMakeRepository _vehicleMake;
+        public IVehicleMakeRepository VehicleMake
         {
             get
             {
-                if (_vehicleModelType == null) { _vehicleModelType = new VehicleModelTypeRepository(_context); }
-                return _vehicleModelType;
+                if (_vehicleMake == null) { _vehicleMake = new VehicleMakeRepository(_context); }
+                return _vehicleMake;
             }
         }
+
     }
 }

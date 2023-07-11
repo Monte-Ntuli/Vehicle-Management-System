@@ -2,7 +2,7 @@
 
 namespace BlazorApp1.Client.Services
 {
-    public class VehicleModelTypeService : IVehicleModelTypeService
+    public class VehicleMakeService : IVehicleMakeService
     {
     }
 }

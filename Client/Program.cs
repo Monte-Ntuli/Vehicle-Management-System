@@ -24,7 +24,7 @@ namespace BlazorApp1.Client
             builder.Services.AddScoped<IQuestionsService, QuestionsService>();
             builder.Services.AddScoped<IVehicleService, VehicleService>();
             builder.Services.AddScoped<IVehicleTypeService, VehicleTypeService>();
-            builder.Services.AddScoped<IVehicleModelTypeService, VehicleModelTypeService>();
+            builder.Services.AddScoped<IVehicleMakeService, VehicleMakeService>();
 
             builder.Services.AddBlazoredLocalStorage();
             builder.Services.AddMudServices();

@@ -1,4 +1,4 @@
-﻿namespace BlazorApp1.Shared.RequestModels
+﻿namespace BlazorApp1.Shared.AppUserDTO
 {
     public class FindEmailRM
     {
