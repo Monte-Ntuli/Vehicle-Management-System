@@ -2,6 +2,8 @@
 @layout EmptyLayout
 @inherits AccountBase;
 @using MudBlazor
+@using System.Text.RegularExpressions
+@using System.ComponentModel.DataAnnotations
 
 
 <MudCard Class="align-content-center; container-sm">
@@ -20,17 +22,19 @@
         <br />
         <MudItem Class="form-floating">
             <MudTextField Label="Last name" Class="form-control" Required="true" RequiredError="Last name is required!"
-            @bind-Value="employee.LastName" For="@(() => employee.LastName)" Placeholder="Doe" InputType="InputType.Text" />
+            @bind-Value="employee.LastName" For="@(() => employee.LastName)" Placeholder="Doe" InputType="InputType.Text"/>
         </MudItem>
         <br />
         <MudItem Class="form-floating">
             <MudTextField Label="Email address" Class="form-control" Required="true" RequiredError="Email is required!"
-            @bind-Value="employee.Email" For="@(() => employee.Email)" Placeholder="johndoe@example.com" InputType="InputType.Email" />
+            @bind-Value="employee.Email" For="@(() => employee.Email)" Placeholder="johndoe@example.com" InputType="InputType.Email"
+                          Validation="@(new EmailAddressAttribute() {ErrorMessage = "The email address is invalid"})" />
         </MudItem>
         <br />
         <MudItem Class="form-floating">
             <MudTextField Label="Confirm Email address" Class="form-control" Required="true" RequiredError="Please confirm email!"
-            @bind-Value="confirmEmail" For="@(() => confirmEmail)" Placeholder="johndoe@example.com" InputType="InputType.Email" />
+            @bind-Value="confirmEmail" For="@(() => confirmEmail)" Placeholder="johndoe@example.com" InputType="InputType.Email"
+                          Validation="@(new EmailAddressAttribute() {ErrorMessage = "The email address is invalid"})" />
         </MudItem>
         <br />
         <MudItem Class="form-floating">
@@ -40,12 +44,14 @@
         <br />
         <MudItem Class="form-floating">
             <MudTextField Label="Password" Class="form-control" Required="true" RequiredError="Password is required!"
-            @bind-Value="confirmPassword" For="@(() => confirmPassword)" Placeholder="Password" InputType="InputType.Password" />
+            @bind-Value="confirmPassword" For="@(() => confirmPassword)" Placeholder="Password" InputType="InputType.Password"
+                          Validation="@(new Func<string, IEnumerable<string>>(PasswordStrength))" @ref="pwField1" />
         </MudItem>
         <br />
         <MudItem Class="form-floating">
             <MudTextField Label="Confirm Password" Class="form-control" Required="true" RequiredError="Please confirm password!"
-            @bind-Value="employee.Password" For="@(() => employee.Password)" Placeholder="Password" InputType="InputType.Password" />
+            @bind-Value="employee.Password" For="@(() => employee.Password)" Placeholder="Password" InputType="InputType.Password"
+                          Validation="@(new Func<string, IEnumerable<string>>(PasswordStrength))" @ref="pwField1" />
         </MudItem>
         <br />
         <MudItem Class="form-floating">
@@ -58,6 +64,15 @@
         <br />
         <br />
     </MudForm>
+    <MudItem xs="12" sm="5">
+        <MudPaper Class="pa-4 mud-height-full">
+            <MudText Typo="Typo.subtitle2">@($"Errors ({errors.Length})")</MudText>
+                @foreach (var error in errors)
+            {
+                <MudText Color="@Color.Error">@error</MudText>
+            }
+        </MudPaper>
+    </MudItem>
     <br />
 </MudCard>
 
@@ -65,4 +80,28 @@
     string[] errors = { };
     MudTextField<string> pwField1;
     MudForm form;
+
+    private IEnumerable<string> PasswordStrength(string pw)
+    {
+        if (string.IsNullOrWhiteSpace(pw))
+        {
+            yield return "Password is required!";
+            yield break;
+        }
+        if (pw.Length < 8)
+            yield return "Password must be at least of length 8";
+        if (!Regex.IsMatch(pw, @"[A-Z]"))
+            yield return "Password must contain at least one capital letter";
+        if (!Regex.IsMatch(pw, @"[a-z]"))
+            yield return "Password must contain at least one lowercase letter";
+        if (!Regex.IsMatch(pw, @"[0-9]"))
+            yield return "Password must contain at least one digit";
+    }
+
+    private string PasswordMatch(string arg)
+    {
+        if (pwField1.Value != arg)
+            return "Passwords don't match";
+        return null;
+    }
 }
