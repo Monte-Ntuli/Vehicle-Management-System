@@ -1,0 +1,93 @@
+﻿@page "/CustomersDashboard"
+@inherits LayoutComponentBase
+@inject NavigationManager navMan;
+
+<div>
+
+    <main class="">
+        <div class="row">
+
+            <!-- This is the main page content -->
+            <div class="col-8">
+                <h1>Customers</h1>
+
+                <!-- Display all customers -->
+
+                <div class="card bg-white shadow">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr class="table-primary">
+                                    <th scope="col">#</th>
+                                    <th scope="col">First Name</th>
+                                    <th scope="col">Last Name</th>
+                                    <th scope="col">Email</th>
+                                    <th scope="col">Phone Number</th>
+                                    <th scope="col">View</th>
+                                    <th scope="col">Edit</th>
+                                    <th scope="col">Delete</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th scope="row">1</th>
+                                    <td>Mark</td>
+                                    <td>Otto</td>
+                                    <td>markotto@gmail.com</td>
+                                    <td>0685213274</td>
+                                    <td>
+                                        <a @onclick="ViewCustomer">
+                                           <img src="iCONS/visibility_FILL0_wght400_GRAD0_opsz48.png" width="32" height="32" />
+                                            </a>
+                                        
+                                    </td>
+                                    <td>
+                                        <a @onclick="EditCustomer">
+                                            <img src="iCONS/edit_FILL0_wght400_GRAD0_opsz48.png" width="32" height="32" />
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a @onclick=DeleteCustomer>
+                                            <img src="iCONS/delete_FILL0_wght400_GRAD0_opsz48.png" width="32" height="32" />
+                                        </a>
+                                    </td>
+                                </tr>
+                                
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="card-footer bg-white">
+                        <button class="btn btn-primary" @onclick="AddCustomer">Add Customer</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </main>
+
+</div>
+
+@code {
+
+    public void AddCustomer()
+    {
+        navMan.NavigateTo("AddCustomer");
+    }
+
+    public void EditCustomer()
+    {
+        navMan.NavigateTo("EditCustomer");
+    }
+
+    public void DeleteCustomer()
+    {
+
+    }
+
+    public void ViewCustomer()
+    {
+        navMan.NavigateTo("ViewCustomer");
+    }
+
+}

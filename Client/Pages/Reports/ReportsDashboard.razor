@@ -1,0 +1,62 @@
+﻿@page "/ReportsDashBoard"
+@inherits ReportsBase;
+
+<div>
+
+    <main class="">
+        <div class="row">
+            
+            <!-- This is the main page content -->
+            <div class="col-8">
+                <h1>Reports</h1>
+
+                <div class="card bg-white shadow">
+
+
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr class="table-primary">
+                                    <th scope="col">Questionaire Title</th>
+                                    <th scope="col">Vehicle Type</th>
+                                    <th scope="col">View</th>
+                                    
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var questionaire in Questionaires)
+                                {
+                                    <tr>
+                                        <td>
+                                            @questionaire.Title
+                                        </td>
+                                        @foreach (var item in VehicleTypes)
+                                        {
+                                            if (item.VehicleTypeID == questionaire.VehicleTypeID)
+                                            {
+                                                <td>
+                                                    @item.VehicleTypeTitle
+                                                </td>
+                                            }
+                                        }
+                                        <td>
+                                            <a href="ViewReportsVehicle/@questionaire.VehicleTypeID" @onclick="(() => viewReportVehicle(questionaire.VehicleTypeID))">
+                                                <img src="iCONS/visibility_FILL0_wght400_GRAD0_opsz48.png" width="32" height="32" />
+                                            </a>
+                                        </td> 
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </main>
+</div>
+
+@code {
+
+}

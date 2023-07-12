@@ -1,0 +1,110 @@
+﻿@page "/QuestionairesDashboard"
+@page "/QuestionairesDashboard/{ID:int}"
+@inject NavigationManager navMan;
+@inherits QuestionaireBase;
+
+<div>
+    
+    <main class="">
+        <div class="row">
+           
+            <!-- This is the main page content -->
+            <div class="col-8">
+                <h1>Questionaires</h1>
+
+                <!-- Display all Questionaires -->
+                <div class="card-header bg-white">
+                    <div class="d-flex justify-content-between">
+                        <div class="d-flex justify-content-start" style="margin-left:-2%">
+                            <button class="btn btn-success shadow" @onclick="export">Export to excel</button>
+                        </div>
+                        <div class="d-flex justify-content-end" style="margin-right:-2%">
+                            <button class="btn btn-primary shadow" @onclick="AddQuestionaire">Add Questionaire</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="card bg-white shadow"> 
+                    
+                 
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr class="table-primary">
+                                    <th scope="col">Questionaire Title</th>
+                                    <th scope="col">Vehicle Type</th>
+                                    <th scope="col">View</th>
+                                    <th scope="col">Edit</th>
+                                    <th scope="col">Delete</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var questionaire in Questionaires)
+                                {
+                                    <tr>
+                                        <td>
+                                            @questionaire.Title
+                                        </td>
+                                        @foreach (var item in VehicleTypes)
+                                        {
+                                            if (item.VehicleTypeID == questionaire.VehicleTypeID)
+                                            {
+                                                <td>
+                                                    @item.VehicleTypeTitle
+                                                </td>
+                                            }
+                                        }
+                                        <td>
+                                            <a href="ViewQuestionaire/@questionaire.QuestionaireID" @onclick="(() => viewQuestionaire(questionaire.QuestionaireID))">
+                                                <img src="iCONS/visibility_FILL0_wght400_GRAD0_opsz48.png" width="32" height="32" />
+                                            </a>
+                                            
+                                        </td>
+                                        <td>
+                                            <a href="EditQuestionaire/@questionaire.QuestionaireID" @onclick="(() => editQuestionaire(questionaire.QuestionaireID))">
+                                                <img src="iCONS/edit_FILL0_wght400_GRAD0_opsz48.png" width="32" height="32" />
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <a @onclick=DeleteQuestionaire>
+                                                <img src="iCONS/delete_FILL0_wght400_GRAD0_opsz48.png" width="32" height="32" />
+                                            </a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                </div>
+
+               
+            </div>
+        </div>
+
+    </main>
+
+</div>
+
+@code {
+
+    public void AddQuestionaire()
+    {
+        navMan.NavigateTo("AddQuestionaire");
+    }
+
+    public void EditQuestionaire()
+    {
+        navMan.NavigateTo("EditQuestionaire");
+    }
+
+    public void DeleteQuestionaire()
+    {
+
+    }
+
+    public void ViewQuestionaire()
+    {
+        navMan.NavigateTo("ViewQuestionaire");
+    }
+
+}

@@ -1,0 +1,127 @@
+﻿@page "/VehiclesDashboard"
+@inherits VehiclesBase;
+@inject NavigationManager navMan;
+
+<div>
+    
+    <main class="">
+        <div class="row">
+            <!-- This is the main page content -->
+            <div class="container">
+                <h1>Vehicles</h1>
+
+                 <!-- Display all vehicles -->
+                 <div class="card-header bg-white">
+                    <div class="d-flex justify-content-between">
+                        <div class="d-flex justify-content-start" style="margin-left:-2%">
+                            <button class="btn btn-success shadow" @onclick="export">Export to excel</button>
+                         </div>
+                        <div class="d-flex justify-content-end" style="margin-right:-2%">
+                            <button class="btn btn-primary shadow" @onclick="AddVehicle">Add Vehicle</button>
+                        </div>
+                     </div>
+                    
+                    
+                 </div>
+                 <div class="card bg-white shadow">
+                       
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr class="table-primary">
+                                        <th scope="col">VehicleReg</th>
+                                        <th scope="col">Vin Number</th>
+                                        <th scope="col">Vehicle Make</th>
+                                        <th scope="col">Vehicle Type</th>
+                                        <th scope="col">View</th>
+                                        <th scope="col">Edit</th>
+                                        <th scope="col">Delete</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var vehicle in Vehicles)
+                                {
+                                    <tr>
+                                        <td>
+                                            @vehicle.VehicleReg
+                                        </td>
+
+                                        <td>
+                                            @vehicle.VinNumber
+                                        </td>
+
+                                        @foreach (var model in VehicleModelTypes)
+                                        {
+                                            if (model.VehicleMakeID == vehicle.VehicleModelType)
+                                            {
+                                                <td>
+                                                    @model.VehicleMakeTitle
+                                                </td>
+                                            }
+                                        }
+
+                                        @foreach (var item in VehicleTypes)
+                                        {
+                                            if (item.VehicleTypeID == vehicle.VehicleTypeID)
+                                            {
+                                                <td>
+                                                    @item.VehicleTypeTitle
+                                                </td>
+                                            }
+                                        }
+                                        
+                                        <td>
+                                            <a href="ViewVehicle/@vehicle.VehicleID" @onclick="(() =>viewVehicle(vehicle.VehicleID))">
+                                                <img src="iCONS/visibility_FILL0_wght400_GRAD0_opsz48.png" width="32" height="32" />
+                                            </a>
+                                            
+                                        </td>
+                                        <td>
+
+                                            <a href="EditVehicle/@vehicle.VehicleID" @onclick="(() =>editVehicle(vehicle.VehicleID))">
+                                                <img src="iCONS/edit_FILL0_wght400_GRAD0_opsz48.png" width="32" height="32" />
+                                            </a>
+                                        </td>
+                                        <td>
+                                           
+                                            <a >
+                                                <img src="iCONS/delete_FILL0_wght400_GRAD0_opsz48.png" width="32" height="32" />
+                                            </a>
+                                        </td>
+                                    </tr>
+                                }
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                   </div>
+            </div>
+        </div>
+
+    </main>
+
+</div>
+
+@code {
+
+    public void AddVehicle()
+    {
+        navMan.NavigateTo("AddVehicle");
+    }
+
+    public void EditVehicle()
+    {
+        navMan.NavigateTo("EditVehicle");
+    }
+
+    public void DeleteVehicle()
+    {
+
+    }
+
+    public void ViewVehicle()
+    {
+        navMan.NavigateTo("ViewVehicle");
+    }
+
+}

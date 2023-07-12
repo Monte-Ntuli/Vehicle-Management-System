@@ -1,0 +1,105 @@
+﻿@page "/EmployeeDashboard"
+@inject NavigationManager navMan;
+@inherits EmployeeBase
+
+<div>
+    <main>
+        <div class="row">
+            <!-- This is the main page content -->
+            <div class="container">
+                <div class="main-body">
+                    <h1>Employees</h1>
+
+                    <!-- Display all users/employees -->
+
+                   <div class="card bg-white shadow">
+
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr class="table-primary">
+                                        <th scope="col">First Name</th>
+                                        <th scope="col">Last Name</th>
+                                        <th scope="col">Email</th>
+                                        <th scope="col">Phone Number</th>
+                                        <th scope="col">Role</th>
+                                        <th scope="col">View</th>
+                                        <th scope="col">Edit</th>
+                                        <th scope="col">Delete</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach(var employee in Employee)
+                                    {
+                                        <tr>
+                                            <td>
+                                                @employee.FirstName
+                                            </td>
+                                            <td>
+                                                @employee.LastName
+                                            </td>
+                                            <td>
+                                                @employee.Email
+                                            </td>
+                                            <td>
+                                                @employee.PhoneNum
+                                            </td>
+                                            <td>
+                                                @employee.Role
+                                            </td>
+                                            <td>
+                                                <a href="ViewEmployee/@employee.UserID">
+                                                <img src="iCONS/visibility_FILL0_wght400_GRAD0_opsz48.png" width="32" height="32" />
+                                                </a> 
+                                            </td>
+                                            <td>
+                                                <a href="EditEmployee/@employee.UserID">
+                                                    <img src="iCONS/edit_FILL0_wght400_GRAD0_opsz48.png" width="32" height="32" />
+                                                </a>
+                                            </td>
+                                            <td>
+                                                <a @onclick="DeleteUser">
+                                                    <img src="iCONS/delete_FILL0_wght400_GRAD0_opsz48.png" width="32" height="32" />
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="card-footer bg-white">
+                            <button class="btn btn-primary" @onclick="AddEmployee">Add Employee</button>
+                        </div>
+                   </div>
+
+                </div>
+
+            </div>
+        </div>
+
+    </main>
+</div>
+
+@code {
+
+    public void AddEmployee()
+    {
+        navMan.NavigateTo("AddEmployee");
+    }
+
+    public void EditUser()
+    {
+        navMan.NavigateTo("EditEmployee");
+    }
+
+    public void DeleteUser()
+    {
+
+    }
+
+    public void ViewUser()
+    {
+        navMan.NavigateTo("ViewEmployee");
+    }
+
+}

@@ -1,0 +1,68 @@
+﻿@page "/VehicleModelTypeDashboard"
+@inherits VehicleMakeBase;
+
+<main class="">
+    <div class="row">
+        <!-- This is the main page content -->
+        <div class="conatiner">
+            <h1>Vehicle Make</h1>
+            <br/>
+            <!-- Display all vehicles -->
+
+            <div class="card-header bg-white">
+                <div class="d-flex justify-content-between">
+                    <div class="d-flex justify-content-start" style="margin-left:-2%">
+                        <button class="btn btn-primary" @onclick="navigateToAdd">Add Vehicle Model Type</button>
+                    </div>
+                    
+                </div>
+            </div>
+            <div class="card bg-white shadow">
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr class="table-primary">
+                                <th scope="col">Vehicle Model Type</th>
+                                <th scope="col">View</th>
+                                <th scope="col">Edit</th>
+                                <th scope="col">Delete</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var vehicleModelType in VehicleModelTypes)
+                            {
+                                <tr>
+                                    <td>
+                                        @vehicleModelType.VehicleMakeTitle
+                                    </td>
+                                    <td>
+                                        <a href="ViewVehicleModelType/@vehicleModelType.VehicleMakeID" @onclick="() =>viewVehicleModelType(vehicleModelType.VehicleMakeID)">
+                                            <img src="iCONS/visibility_FILL0_wght400_GRAD0_opsz48.png" width="32" height="32" />
+                                        </a>
+
+                                    </td>
+                                    <td>
+
+                                        <a href="EditVehicleModelType/@vehicleModelType.VehicleMakeID" @onclick="() =>editVehicleModelType(vehicleModelType.VehicleMakeID)">
+                                            <img src="iCONS/edit_FILL0_wght400_GRAD0_opsz48.png" width="32" height="32" />
+                                        </a>
+                                    </td>
+                                    <td>
+
+                                        <a>
+                                            <img src="iCONS/delete_FILL0_wght400_GRAD0_opsz48.png" width="32" height="32" />
+                                        </a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</main>
+@code {
+
+}
