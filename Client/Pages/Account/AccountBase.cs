@@ -70,6 +70,8 @@ namespace BlazorApp1.Client.Pages.Account
         #region Register new user
         public async Task Register()
         {
+            ValidatePassword(employee.Password);
+
             Validate();
 
             ValidateEmail(employee.Email);
@@ -89,6 +91,21 @@ namespace BlazorApp1.Client.Pages.Account
 
         }
 
+        private void ValidatePassword(string password)
+        {
+            Regex regex = new Regex(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$");
+            Match match = regex.Match(password);
+
+            if (match.Success)
+            {
+                checker = true;
+            }
+            else
+            {
+                JSRuntime.InvokeVoidAsync("alert", "Password must contain: 8 Characters, 1 LowerCase, 1 UpperCase, 1 number and 1 Special Character");
+                checker = false;
+            }
+        }
         private void ValidateEmail(string email)
         {
             Regex regex = new Regex(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$");
