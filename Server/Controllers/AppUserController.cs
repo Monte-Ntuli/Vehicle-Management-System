@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+using System.Data.Entity;
 using System.IdentityModel.Tokens.Jwt;
 using System.Text;
 
@@ -39,6 +40,7 @@ namespace BlazorApp1.Server.Controllers
 
 
         }
+
         #region Register new user
         [HttpPost("Register")] //Register a new user using Identity FrameWork... this is for admins
         public async Task<IActionResult> RegisterUser([FromBody] EmployeeRM employeeRequestModel)
@@ -47,6 +49,7 @@ namespace BlazorApp1.Server.Controllers
             var user = new AppUser()
             {
                 FirstName = employeeRequestModel.FirstName,
+                UserID = GenerateUserID(),
                 LastName = employeeRequestModel.LastName,
                 Role = employeeRequestModel.Role,
                 Email = employeeRequestModel.Email,
@@ -74,6 +77,16 @@ namespace BlazorApp1.Server.Controllers
             return BadRequest();
 
 
+        }
+        
+        private int GenerateUserID()
+        {
+            var highestId = _userManager.Users.OrderByDescending(x => x.UserID).FirstOrDefault();
+            if (highestId != null)
+            {
+                return highestId.UserID + 1;
+            }
+            return 1;
         }
         #endregion
 

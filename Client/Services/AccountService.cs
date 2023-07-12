@@ -106,8 +106,11 @@ namespace BlazorApp1.Client.Services
             var response = result.StatusCode;
             if (response != System.Net.HttpStatusCode.Accepted)
             {
-
                 await _jsRuntime.InvokeVoidAsync("alert", response.ToString());
+            }
+            if (response == System.Net.HttpStatusCode.MethodNotAllowed)
+            {
+                await _jsRuntime.InvokeVoidAsync("alert", response.ToString() + " Please Confirm Email Address ");
             }
             if (response == System.Net.HttpStatusCode.Accepted)
             {

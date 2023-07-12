@@ -38,7 +38,7 @@ namespace BlazorApp1.Server
             services.AddIdentity<AppUser, IdentityRole>(options => { }).AddEntityFrameworkStores<VehicleDbContext>();
 
             // used to reset password
-            services.AddIdentityCore<AppUser>(options => options.SignIn.RequireConfirmedAccount = true)
+            services.AddIdentityCore<AppUser>(options => options.SignIn.RequireConfirmedAccount = false)
                 .AddEntityFrameworkStores<VehicleDbContext>()
                 .AddTokenProvider<DataProtectorTokenProvider<AppUser>>(TokenOptions.DefaultProvider);
 
