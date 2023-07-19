@@ -4,6 +4,7 @@ using BlazorApp1.Shared.EmployeeDTO;
 using Blazored.LocalStorage;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
+using MudBlazor;
 using System.Text.RegularExpressions;
 
 namespace BlazorApp1.Client.Pages.Account
@@ -25,6 +26,8 @@ namespace BlazorApp1.Client.Pages.Account
         [Inject]
         ILocalStorageService localStorage { get; set; }
 
+        [Inject]
+        public ISnackbar Snackbar { get; set; }
         public AppUserDTO AppUser { get; set; } = new AppUserDTO();
         public AppUserDTO UpdateAppUser { get; set; } = new AppUserDTO();
         public LoginDTO login { get; set; } = new LoginDTO();
@@ -86,7 +89,7 @@ namespace BlazorApp1.Client.Pages.Account
             }
             if (checker == false)
             {
-                await JSRuntime.InvokeVoidAsync("alert", "Failed to register");
+                Snackbar.Add("Failed to register", Severity.Warning, config => { config.ShowCloseIcon = false; });
                 NavMan.NavigateTo("Register");
             }
 
@@ -103,7 +106,7 @@ namespace BlazorApp1.Client.Pages.Account
             }
             else
             {
-                JSRuntime.InvokeVoidAsync("alert", "Password must contain: 8 Characters, 1 LowerCase, 1 UpperCase, 1 number and 1 Special Character");
+                Snackbar.Add("Password must contain: 8 Characters, 1 LowerCase, 1 UpperCase, 1 number and 1 Special Character", Severity.Warning, config => { config.ShowCloseIcon = false; });
                 checker = false;
             }
         }
@@ -118,7 +121,7 @@ namespace BlazorApp1.Client.Pages.Account
             }
             else
             {
-                JSRuntime.InvokeVoidAsync("alert", "please type in valid email");
+                Snackbar.Add("Please type in valid email", Severity.Warning, config => { config.ShowCloseIcon = false; });
                 checker = false;
             }
         }
@@ -126,12 +129,12 @@ namespace BlazorApp1.Client.Pages.Account
         {
             if (confirmEmail != employee.Email)
             {
-                await JSRuntime.InvokeVoidAsync("alert", "Please make sure emails match");
+                Snackbar.Add("Please make sure emails match", Severity.Warning, config => { config.ShowCloseIcon = false; });
                 checker = false;
             }
             if (confirmPassword != employee.Password)
             {
-                await JSRuntime.InvokeVoidAsync("alert", "Please make sure passwords match");
+                Snackbar.Add("Please make sure passwords match", Severity.Warning, config => { config.ShowCloseIcon = false; });
                 checker = false;
             }
             else
@@ -151,9 +154,20 @@ namespace BlazorApp1.Client.Pages.Account
         {
             await localStorage.ClearAsync();
 
-            var result = AccountService.Login(login);
-
-            company = await localStorage.GetItemAsync<string>("UserName");
+            if (string.IsNullOrEmpty(login.Email))
+            {
+                Snackbar.Add("Email can not be empty", Severity.Warning, config => { config.ShowCloseIcon = false; });
+            }
+            if(string.IsNullOrEmpty(login.Password))
+            {
+                Snackbar.Add("Password can not be empty", Severity.Warning, config => { config.ShowCloseIcon = false; });
+            }
+            else
+            {
+                var result = AccountService.Login(login);
+                company = await localStorage.GetItemAsync<string>("UserName");
+            }
+            
 
         }
 
@@ -172,8 +186,6 @@ namespace BlazorApp1.Client.Pages.Account
         public async Task EditAdminProfile()
         {
             await ValidateUserDatat();
-
-
         }
 
         public async Task ValidateUserDatat()
@@ -223,7 +235,7 @@ namespace BlazorApp1.Client.Pages.Account
 
             if (confirmPassword != NewPassword)
             {
-                await JSRuntime.InvokeVoidAsync("alert", "Please make sure passwords match");
+                Snackbar.Add("Please make sure passwords match", Severity.Warning, config => { config.ShowCloseIcon = false; });
                 checker = false;
             }
             if (confirmPassword == NewPassword)
@@ -234,7 +246,7 @@ namespace BlazorApp1.Client.Pages.Account
                 }
                 else
                 {
-                    await JSRuntime.InvokeVoidAsync("alert", "Password is not strong enough");
+                    Snackbar.Add("Password is not strong enough", Severity.Warning, config => { config.ShowCloseIcon = false; });
                     checker = false;
                 }
             }

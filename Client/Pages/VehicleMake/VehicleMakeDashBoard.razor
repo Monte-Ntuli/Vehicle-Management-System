@@ -9,20 +9,20 @@
             <br/>
             <!-- Display all vehicles -->
 
-            <div class="card-header bg-white">
-                <div class="d-flex justify-content-between">
-                    <div class="d-flex justify-content-start" style="margin-left:-2%">
-                        <button class="btn btn-primary" @onclick="navigateToAdd">Add Vehicle Model Type</button>
-                    </div>
-                    
-                </div>
-            </div>
             <div class="card bg-white shadow">
+                <div class="card-header bg-white">
+                    <div class="d-flex justify-content-between">
+                        <div class="d-flex justify-content-start">
+                            <button class="btn btn-primary" @onclick="navigateToAdd">Add Vehicle Make</button>
+                        </div>
+
+                    </div>
+                </div>
                 <div class="table-responsive">
                     <table class="table table-hover">
                         <thead>
                             <tr class="table-primary">
-                                <th scope="col">Vehicle Model Type</th>
+                                <th scope="col">Vehicle Make</th>
                                 <th scope="col">View</th>
                                 <th scope="col">Edit</th>
                                 <th scope="col">Delete</th>

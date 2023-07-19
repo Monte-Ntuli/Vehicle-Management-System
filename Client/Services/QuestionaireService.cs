@@ -1,29 +1,40 @@
 ﻿using BlazorApp1.Client.Services.Interfaces;
+using BlazorApp1.Shared.EmployeeDTO;
 using BlazorApp1.Shared.QuestionaireDTO;
 using BlazorApp1.Shared.QuestionsDTO;
+using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
+using MudBlazor;
 using System.Net.Http.Json;
 
 namespace BlazorApp1.Client.Services
 {
     public class QuestionaireService : IQuestionaireService
     {
+        [Inject]
+        public ISnackbar Snackbar { get; set; }
         private readonly HttpClient _httpClient;
-        private readonly IJSRuntime _jsRuntime;
         public List<QuestionaireDTORM> questionaires { get; set; } = new List<QuestionaireDTORM>();
         public List<CreateQuestionaireDTO> creates { get; set; } = new List<CreateQuestionaireDTO>();
         public List<QuestionsDTO> questions { get; set; } = new List<QuestionsDTO>();
 
-        public QuestionaireService(HttpClient httpClient, IJSRuntime JSRuntime)
+        public QuestionaireService(HttpClient httpClient)
         {
             _httpClient = httpClient;
-            _jsRuntime = JSRuntime;
         }
         public async Task CreateQuestion(CreateQuestionDTO createQuestion)
         {
             var result = await _httpClient.PostAsJsonAsync("api/Questions/Create", createQuestion);
-            var response = await result.Content.ReadFromJsonAsync<List<QuestionsDTO>>();
-            questions = response;
+            if (result.StatusCode == System.Net.HttpStatusCode.Accepted)
+            {
+                var response = await result.Content.ReadFromJsonAsync<List<QuestionsDTO>>();
+                Snackbar.Add("Question Created sucessfully", Severity.Success, config => { config.ShowCloseIcon = false; });
+                questions = response;
+            }
+            else
+            {
+                Snackbar.Add(result.ToString(), Severity.Error, config => { config.ShowCloseIcon = false; });
+            }
         }
         public async Task<IEnumerable<QuestionsDTO>> GetQuestionsByCompany(string company)
         {
@@ -52,11 +63,11 @@ namespace BlazorApp1.Client.Services
 
             if (response == System.Net.HttpStatusCode.Accepted)
             {
-                await _jsRuntime.InvokeVoidAsync("alert", "Questionaire created successfuly");
+                Snackbar.Add("Questionaire created successfuly", Severity.Success, config => { config.ShowCloseIcon = false; });
             }
             else
             {
-                await _jsRuntime.InvokeVoidAsync("alert", "Server error occured, please check internet connection");
+                Snackbar.Add(response.ToString(), Severity.Error, config => { config.ShowCloseIcon = false; });
             }
 
         }

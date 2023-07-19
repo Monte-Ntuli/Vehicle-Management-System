@@ -1,11 +1,16 @@
 ﻿using BlazorApp1.Client.Services.Interfaces;
+using BlazorApp1.Shared.EmployeeDTO;
 using BlazorApp1.Shared.VehiclesDTO;
+using Microsoft.AspNetCore.Components;
+using MudBlazor;
 using System.Net.Http.Json;
 
 namespace BlazorApp1.Client.Services
 {
     public class VehicleService : IVehicleService
     {
+        [Inject]
+        public ISnackbar Snackbar { get; set; }
         private readonly HttpClient _httpClient;
 
         public List<VehicleDTO> Vehicles { get; set; } = new List<VehicleDTO>();
@@ -28,14 +33,30 @@ namespace BlazorApp1.Client.Services
         public async Task Create(CreateVehicleDTO createVehicleDTO)
         {
             var result = await _httpClient.PostAsJsonAsync("api/Vehicles/Create", createVehicleDTO);
-            var response = await result.Content.ReadFromJsonAsync<List<VehicleDTO>>();
-            Vehicles = response;
+            if (result.StatusCode == System.Net.HttpStatusCode.Accepted)
+            {
+                var response = await result.Content.ReadFromJsonAsync<List<VehicleDTO>>();
+                Snackbar.Add("Vehicle created sucessfully", Severity.Success, config => { config.ShowCloseIcon = false; });
+                Vehicles = response;
+            }
+            else
+            {
+                Snackbar.Add(result.ToString(), Severity.Error, config => { config.ShowCloseIcon = false; });
+            }
         }
         public async Task Update(UpdateVehicleDTO updateVehicleDTO)
         {
             var result = await _httpClient.PostAsJsonAsync("api/Vehicles/Update", updateVehicleDTO);
-            var response = await result.Content.ReadFromJsonAsync<List<VehicleDTO>>();
-            Vehicles = response;
+            if (result.StatusCode == System.Net.HttpStatusCode.Accepted)
+            {
+                var response = await result.Content.ReadFromJsonAsync<List<VehicleDTO>>();
+                Snackbar.Add("Vehicle updated sucessfully", Severity.Success, config => { config.ShowCloseIcon = false; });
+                Vehicles = response;
+            }
+            else
+            {
+                Snackbar.Add(result.ToString(), Severity.Error, config => { config.ShowCloseIcon = false; });
+            }
         }
 
     }

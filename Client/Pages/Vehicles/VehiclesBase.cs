@@ -11,6 +11,7 @@ using BlazorApp1.Shared.VehiclesDTO;
 using BlazorApp1.Shared.VehicleTypeDTO;
 using BlazorApp1.Shared.VehicleModelTypeDTO;
 using BlazorApp1.Shared.AppUserDTO;
+using MudBlazor;
 
 namespace BlazorApp1.Client.Pages.Vehicles
 {
@@ -37,6 +38,9 @@ namespace BlazorApp1.Client.Pages.Vehicles
 
         [Inject]
         public NavigationManager NavMan { get; set; }
+
+        [Inject]
+        public ISnackbar Snackbar { get; set; }
 
         public IEnumerable<VehicleDTO> Vehicles { get; set; } = new List<VehicleDTO>();
         public IEnumerable<VehicleTypeDTO> VehicleTypes { get; set; } = new List<VehicleTypeDTO>();
@@ -66,11 +70,42 @@ namespace BlazorApp1.Client.Pages.Vehicles
         public async Task SaveVehicle()
         {
             CreateVehicle.Company = company;
-            await VehicleService.Create(CreateVehicle);
-            await JSRuntime.InvokeVoidAsync("alert", "Vehicle Added Successfully");
-
+            if (CreateVehicle.VehicleModelType == 0)
+            {
+                Snackbar.Add("Please select Vehicle Make", Severity.Warning, config => { config.ShowCloseIcon = false; });
+            }
+            if (CreateVehicle.VehicleTypeID == 0)
+            {
+                Snackbar.Add("Please select Vehicle Model", Severity.Warning, config => { config.ShowCloseIcon = false; });
+            }
+            if (CreateVehicle.VehicleModelType == 0 || CreateVehicle.VehicleTypeID == 0 || string.IsNullOrEmpty(CreateVehicle.VehicleReg) || string.IsNullOrEmpty(CreateVehicle.VinNumber))
+            {
+                Snackbar.Add("Please make sure all values are filled", Severity.Warning, config => { config.ShowCloseIcon = false; });
+            }
+            else
+            {
+                await VehicleService.Create(CreateVehicle);
+                Snackbar.Add("Vehicle added successfully", Severity.Success, config => { config.ShowCloseIcon = false; });
+            }
         }
 
+        public async Task AddVehicleMake()
+        {
+            if(VehicleModelTypes.Count() == 0)
+            {
+                Snackbar.Add("Please Create Vehicle Make", Severity.Warning, config => { config.ShowCloseIcon = false; });
+                NavMan.NavigateTo("AddVehicleModelType");
+            }
+            
+        }
+        public async Task AddVehicleModel()
+        {
+            if (VehicleTypes.Count() == 0)
+            {
+                Snackbar.Add("Please Create Vehicle Model", Severity.Warning, config => { config.ShowCloseIcon = false; });
+                NavMan.NavigateTo("AddVehicleType");
+            }
+        }
         #region update vehicle
         public async Task UpdateVehicle()
         {

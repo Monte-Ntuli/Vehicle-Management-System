@@ -4,11 +4,15 @@ using BlazorApp1.Shared.VehicleMakeDTO;
 using BlazorApp1.Shared.VehicleModelTypeDTO;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
+using MudBlazor;
 
 namespace BlazorApp1.Client.Pages.VehicleMake
 {
     public class VehicleMakeBase : ComponentBase
     {
+        [Inject]
+        public ISnackbar Snackbar { get; set; }
+
         [Parameter]
         public string company { get; set; }
 
@@ -54,7 +58,11 @@ namespace BlazorApp1.Client.Pages.VehicleMake
         {
             createVehicleModelType.Company = company;
             await vehicleModelTypeService.Create(createVehicleModelType);
-            await JSRuntime.InvokeVoidAsync("alert", "Vehicle Model Type Added Successfully");
+            Snackbar.Add("Vehicle Model Type Added Successfully", Severity.Success, config => { config.ShowCloseIcon = false; });
+        }
+        public async void CreateVehicle()
+        {
+            NavMan.NavigateTo("AddVehicle");
         }
     }
 }

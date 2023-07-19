@@ -3,6 +3,7 @@ using BlazorApp1.Shared.AppUserDTO;
 using BlazorApp1.Shared.EmployeeDTO;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
+using MudBlazor;
 using System;
 using System.Collections;
 
@@ -10,6 +11,9 @@ namespace BlazorApp1.Client.Pages.Employees
 {
     public class EmployeeBase : ComponentBase
     {
+        [Inject]
+        public ISnackbar Snackbar { get; set; }
+
         [Parameter]
         public string company { get; set; }
 
@@ -45,7 +49,7 @@ namespace BlazorApp1.Client.Pages.Employees
             createEmployeeDTO.Company = company;
             createEmployeeDTO.UserName = createEmployeeDTO.Email;
             await EmployeeService.Create(createEmployeeDTO);
-            await JSRuntime.InvokeVoidAsync("alert", "Employee Added Successfully");
+            Snackbar.Add("Employee Added Successfully", Severity.Success, config => { config.ShowCloseIcon = false; });
         }
 
         public async Task EditEmployee()
@@ -57,6 +61,7 @@ namespace BlazorApp1.Client.Pages.Employees
             checkForNull();
 
             await EmployeeService.Update(updateEmployeeDTO);
+            Snackbar.Add("Employee Updated Successfully", Severity.Success, config => { config.ShowCloseIcon = false; });
 
         }
 

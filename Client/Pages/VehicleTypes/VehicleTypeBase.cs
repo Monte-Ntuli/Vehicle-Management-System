@@ -4,11 +4,15 @@ using BlazorApp1.Shared.QuestionaireDTO;
 using BlazorApp1.Shared.VehicleTypeDTO;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
+using MudBlazor;
 
 namespace BlazorApp1.Client.Pages.VehicleTypes
 {
     public class VehicleTypeBase : ComponentBase
     {
+        [Inject]
+        public ISnackbar Snackbar { get; set; }
+
         [Parameter]
         public string company { get; set; }
 
@@ -48,12 +52,16 @@ namespace BlazorApp1.Client.Pages.VehicleTypes
         {
             NavMan.NavigateTo("AddVehicleType");
         }
+        public async void CreateVehicle()
+        {
+            NavMan.NavigateTo("AddVehicle");
+        }
 
         public async void SaveVehicleType()
         {
             CreateVehicleType.Company = company;
             await vehicleTypeService.Create(CreateVehicleType);
-            await JSRuntime.InvokeVoidAsync("alert", "Vehicle Type Added Successfully");
+            Snackbar.Add("Vehicle Type Added Successfully", Severity.Success, config => { config.ShowCloseIcon = false; });
         }
 
         public async Task UpdateVehicleType()

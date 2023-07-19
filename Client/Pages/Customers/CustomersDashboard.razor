@@ -14,6 +14,17 @@
                 <!-- Display all customers -->
 
                 <div class="card bg-white shadow">
+                    <div class="card-header bg-white">
+                        <div class="d-flex justify-content-between">
+                            <div class="d-flex justify-content-start">
+                                <button class="btn btn-success shadow">Export Customers</button>
+                            </div>
+                            <div class="d-flex justify-content-end">
+                                <button class="btn btn-primary" @onclick="AddCustomer">Add Customer</button>
+                            </div>
+
+                        </div>
+                    </div>
                     <div class="table-responsive">
                         <table class="table table-hover">
                             <thead>
@@ -56,9 +67,7 @@
                             </tbody>
                         </table>
                     </div>
-                    <div class="card-footer bg-white">
-                        <button class="btn btn-primary" @onclick="AddCustomer">Add Customer</button>
-                    </div>
+                    
                 </div>
 
             </div>

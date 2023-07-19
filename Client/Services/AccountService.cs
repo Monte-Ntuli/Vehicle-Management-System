@@ -4,26 +4,28 @@ using BlazorApp1.Shared.EmployeeDTO;
 using Blazored.LocalStorage;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
+using MudBlazor;
 using System.Net.Http.Json;
 
 namespace BlazorApp1.Client.Services
 {
     public class AccountService : IAccountService
     {
+        [Inject]
+        public ISnackbar Snackbar { get; set; }
+
         private readonly HttpClient _httpClient;
         private readonly NavigationManager _navMan;
-        private readonly IJSRuntime _jsRuntime;
         private readonly ILocalStorageService _localStorage;
         public List<EmployeeDTO> Employees { get; set; } = new List<EmployeeDTO>();
         public List<AppUserDTO> AppUsers { get; set; } = new List<AppUserDTO>();
         public List<LoginDTO> LoginUsers { get; set; } = new List<LoginDTO>();
         public List<char> ApiLoginResponse { get; set; } = new List<char>();
         public HttpResponseMessage ApiResponse { get; set; } = new HttpResponseMessage();
-        public AccountService(HttpClient httpClient, NavigationManager NavMan, IJSRuntime JSRuntime, ILocalStorageService localStorage)
+        public AccountService(HttpClient httpClient, NavigationManager NavMan, ILocalStorageService localStorage)
         {
             _httpClient = httpClient;
             _navMan = NavMan;
-            _jsRuntime = JSRuntime;
             _localStorage = localStorage;
         }
 
@@ -35,11 +37,11 @@ namespace BlazorApp1.Client.Services
 
             if (response == System.Net.HttpStatusCode.Accepted)
             {
-                await _jsRuntime.InvokeVoidAsync("alert", "Password changed sucessfully ");
+                Snackbar.Add("Password changed sucessfully", Severity.Success, config => { config.ShowCloseIcon = false; });
             }
             else
             {
-                await _jsRuntime.InvokeVoidAsync("alert", response.ToString());
+                Snackbar.Add(response.ToString(), Severity.Error, config => { config.ShowCloseIcon = false; });
                 _navMan.NavigateTo("EditProfile", true);
             }
         }
@@ -53,12 +55,12 @@ namespace BlazorApp1.Client.Services
 
             if (response == System.Net.HttpStatusCode.Accepted)
             {
-                await _jsRuntime.InvokeVoidAsync("alert", "Password reset successfully");
+                Snackbar.Add("Password reset successfully", Severity.Success, config => { config.ShowCloseIcon = false; });
                 _navMan.NavigateTo("/", true);
             }
             else
             {
-                await _jsRuntime.InvokeVoidAsync("alert", response.ToString());
+                Snackbar.Add(response.ToString(), Severity.Error, config => { config.ShowCloseIcon = false; });
                 _navMan.NavigateTo("ForgotPasswordChange", true);
             }
         }
@@ -75,7 +77,7 @@ namespace BlazorApp1.Client.Services
             }
             else
             {
-                await _jsRuntime.InvokeVoidAsync("Email has been sent with directions to update password", response.ToString());
+                Snackbar.Add("Email has been sent with directions to update password", Severity.Success, config => { config.ShowCloseIcon = false; });
             }
         }
         #endregion
@@ -88,14 +90,14 @@ namespace BlazorApp1.Client.Services
             var response = result.StatusCode;
             if (response != System.Net.HttpStatusCode.Accepted)
             {
-                await _jsRuntime.InvokeVoidAsync("Alert", response.ToString());
+                Snackbar.Add(response.ToString(), Severity.Error, config => { config.ShowCloseIcon = false; });
             }
             if (response == System.Net.HttpStatusCode.Accepted)
             {
                 var data = await result.Content.ReadFromJsonAsync<List<EmployeeDTO>>();
                 _navMan.NavigateTo("/");
             }
-            await _jsRuntime.InvokeVoidAsync("Alert", response.ToString());
+            Snackbar.Add(response.ToString(), Severity.Error, config => { config.ShowCloseIcon = false; });
         }
         #endregion
 
@@ -106,11 +108,11 @@ namespace BlazorApp1.Client.Services
             var response = result.StatusCode;
             if (response != System.Net.HttpStatusCode.Accepted)
             {
-                await _jsRuntime.InvokeVoidAsync("alert", response.ToString());
+                Snackbar.Add(response.ToString(), Severity.Error, config => { config.ShowCloseIcon = false; });
             }
             if (response == System.Net.HttpStatusCode.MethodNotAllowed)
             {
-                await _jsRuntime.InvokeVoidAsync("alert", response.ToString() + " Please Confirm Email Address ");
+                Snackbar.Add(response.ToString() + " Please Confirm Email Address ", Severity.Warning, config => { config.ShowCloseIcon = false; });
             }
             if (response == System.Net.HttpStatusCode.Accepted)
             {

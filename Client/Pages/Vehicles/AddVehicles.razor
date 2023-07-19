@@ -1,6 +1,6 @@
 ﻿@page "/AddVehicle"
 @inherits VehiclesBase;
-@inject NavigationManager navMan;
+@using MudBlazor
 @using System.Data;
 @using NPOI.XSSF.UserModel;
 @using NPOI.SS.UserModel;
@@ -33,8 +33,8 @@
                                                 </div>
                                                 <br />
                                                 <div class="form-group col-md-8">
-                                                    <label for="inputType">Vehicle Type</label>
-                                                    <select id="inputType" class="form-control" @bind="CreateVehicle.VehicleTypeID">
+                                                    <label for="inputType">Vehicle Make</label>
+                                                    <select id="inputType" class="form-control" @bind="CreateVehicle.VehicleTypeID" @onclick="AddVehicleMake">
 
                                                         @foreach (var type in VehicleTypes)
                                                         {
@@ -45,11 +45,11 @@
                                                 <br />
                                                 <div class="form-group col-md-8">
                                                     <label for="inputType">Vehicle Model</label>
-                                                    <select id="inputType" class="form-control" @bind="CreateVehicle.VehicleModelType">
+                                                    <select id="inputType" class="form-control" @bind="CreateVehicle.VehicleModelType" @onclick="AddVehicleModel">
 
                                                         @foreach (var type in VehicleModelTypes)
                                                         {
-                                                <option @key="@type.VehicleMakeID" value="@type.VehicleMakeID">@type.VehicleMakeTitle</option>
+                                                            <option @key="@type.VehicleMakeID" value="@type.VehicleMakeID">@type.VehicleMakeTitle</option>
                                                         }
                                                     </select>
                                                 </div>

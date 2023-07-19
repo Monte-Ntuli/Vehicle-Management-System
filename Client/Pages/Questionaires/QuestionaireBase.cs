@@ -5,12 +5,16 @@ using BlazorApp1.Shared.QuestionsDTO;
 using BlazorApp1.Shared.VehicleTypeDTO;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
+using MudBlazor;
 using OfficeOpenXml;
 
 namespace BlazorApp1.Client.Pages.Questionaires
 {
     public class QuestionaireBase:ComponentBase
     {
+        [Inject]
+        public ISnackbar Snackbar { get; set; }
+
         [Parameter]
         public int ID { get; set; }
 
@@ -58,13 +62,13 @@ namespace BlazorApp1.Client.Pages.Questionaires
             createQuestionDTO.Company = company;
             createQuestionDTO.QuestionaireID = ID;
             await QuestionaireService.CreateQuestion(createQuestionDTO);
-            await JSRuntime.InvokeVoidAsync("alert", "Vehicle Added Successfully");
+            Snackbar.Add("Question Added Successfullyy", Severity.Success, config => { config.ShowCloseIcon = false; });
         }
         public async Task SaveQuestionaire()
         {
             createQuestionaireDTO.Company = company;
             await QuestionaireService.CreateQuestionaire(createQuestionaireDTO);
-            await JSRuntime.InvokeVoidAsync("alert", "Questionaire Added Successfully");
+            Snackbar.Add("Questionaire Added Successfully", Severity.Success, config => { config.ShowCloseIcon = false; });
 
         }
 
