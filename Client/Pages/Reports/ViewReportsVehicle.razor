@@ -1,0 +1,51 @@
+﻿@page "/ViewReportsVehicle"
+@page "/ViewReportsVehicle/{ID:int}"
+@inherits ReportsBase
+
+<div class="container">
+    <div class="row">
+        <a href="ReportsDashboard" class="nav-link text-black link-dark">
+            <img src="iCONS/arrow_back_FILL0_wght400_GRAD0_opsz48.png" class="rounded-circle">
+        </a>
+        <h1>View Reports</h1>
+            @foreach(var vehicle in Vehicles)
+            {
+                @if (vehicle.VehicleTypeID == ID)
+                {
+                    <div class="card bg-white shadow" style="width: 18rem; margin:0.5%">
+                        <div class="card-body">
+                            <div class="row mt-3">
+                            <div class="col-md-12"><label class="labels">Vehicle Registration</label><input type="text" class="form-control" placeholder="@vehicle.VehicleReg" disabled readonly></div>
+                            <div class="col-md-12"><label class="labels">Vehicle Registration</label><input type="text" class="form-control" placeholder="@vehicle.VinNumber" disabled readonly></div>
+                            @foreach (var vehicleType in VehicleTypes)
+                            {
+                                @if (vehicle.VehicleTypeID == vehicleType.VehicleTypeID)
+                                {
+                                    <div class="col-md-12"><label class="labels">Vehicle Type</label><input type="text" class="form-control" placeholder="@vehicleType.VehicleTypeTitle" disabled readonly></div>
+                                }
+                            }
+                             @foreach (var vehicleModelType in VehicleModelTypes)
+                            {
+                                @if (vehicle.VehicleModelType == vehicleModelType.VehicleMakeID)
+                                {
+                                    <div class="col-md-12"><label class="labels">Vehicle Model</label><input type="text" class="form-control" placeholder="@vehicleModelType.VehicleMakeTitle" disabled readonly></div>
+                                }
+                            }
+                            </div>
+                            <br/>
+
+                        </div>
+                        <div class="card-footer bg-white">
+                              <a href="ViewVehicleReports/@vehicle.VehicleID" @onclick="(() => viewVehicleReport(vehicle.VehicleID))">
+                                    <button class="btn btn-primary"> View Reports </button>
+                                </a>
+                        </div>
+                    </div>
+                    <br />
+                }
+            }
+    </div>
+</div>
+@code {
+
+}

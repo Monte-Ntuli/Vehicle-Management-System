@@ -1,0 +1,43 @@
+﻿@page "/AddVehicleModelType" 
+@inherits VehicleMakeBase;
+
+<div>
+    <main class="">
+        <div class="row">
+
+            <!-- This is the main page content -->
+            <div class="col-8">
+                <div class="container">
+                    <a href="VehicleModelTypeDashboard" class="nav-link text-black link-dark">
+                        <img src="iCONS/arrow_back_FILL0_wght400_GRAD0_opsz48.png" class="rounded-circle">
+                    </a>
+                    <h1>Add Vehicle Make</h1>
+                    <br />
+                    <div class="col-md-8 mb-8">
+                        <div class="card shadow">
+                            <div class="card-body">
+                                <form>
+                                    <div class="form-row">
+                                        <div class="form-group col-md-8">
+                                            <label for="inputTitle">Vehicle Type Name</label>
+                                            <input type="text" class="form-control" id="floatingInput" placeholder="Mercedes Benz" @bind-value="createVehicleModelType.VehicleModelTitle">
+                                        </div>
+                                        
+                                    </div>
+                                    <br />
+                                    <button class="btn btn-primary" @onclick="SaveVehicleModelType">Submit</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Vehicle stats here -->
+                </div>
+            </div>
+        </div>
+
+    </main>
+</div>
+
+@code {
+
+}

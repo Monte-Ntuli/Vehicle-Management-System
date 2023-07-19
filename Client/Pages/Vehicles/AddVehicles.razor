@@ -1,0 +1,107 @@
+﻿@page "/AddVehicle"
+@inherits VehiclesBase;
+@inject NavigationManager navMan;
+@using System.Data;
+@using NPOI.XSSF.UserModel;
+@using NPOI.SS.UserModel;
+
+
+<div>
+    <main class="container">
+           
+                    <a href="VehiclesDashboard" class="nav-link text-black link-dark">
+                        <img src="iCONS/arrow_back_FILL0_wght400_GRAD0_opsz48.png" class="rounded-circle">
+                    </a>
+        <h1>Add Vehicle</h1>
+                    <br />
+                    <div class="container">
+                        <div class="row">
+
+                           <div class="col-4">
+                                <div class="card shadow">
+                                    <div class="card-body">
+                                        <form>
+                                            <div class="form-row">
+                                                <div class="form-group col-md-8">
+                                                    <label for="inputTitle">Vehicle Registration</label>
+                                                    <input type="text" class="form-control" id="floatingInput" placeholder="ABC 123 CD" @bind-value="CreateVehicle.VehicleReg"></input>
+                                                </div>
+                                                <br />
+                                                <div class="form-group col-md-8">
+                                                    <label for="inputTitle">Vin Number</label>
+                                                    <input type="text" class="form-control" id="floatingInput" placeholder="AB344628KLF47DHT" @bind-value="CreateVehicle.VinNumber"></input>
+                                                </div>
+                                                <br />
+                                                <div class="form-group col-md-8">
+                                                    <label for="inputType">Vehicle Type</label>
+                                                    <select id="inputType" class="form-control" @bind="CreateVehicle.VehicleTypeID">
+
+                                                        @foreach (var type in VehicleTypes)
+                                                        {
+                                                            <option @key="@type.VehicleTypeID" value="@type.VehicleTypeID">@type.VehicleTypeTitle</option>
+                                                        }
+                                                    </select>
+                                                </div>
+                                                <br />
+                                                <div class="form-group col-md-8">
+                                                    <label for="inputType">Vehicle Model</label>
+                                                    <select id="inputType" class="form-control" @bind="CreateVehicle.VehicleModelType">
+
+                                                        @foreach (var type in VehicleModelTypes)
+                                                        {
+                                                <option @key="@type.VehicleMakeID" value="@type.VehicleMakeID">@type.VehicleMakeTitle</option>
+                                                        }
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                        </form>
+                                    </div>
+                                    <div class="card-footer bg-white">
+
+                                        <InputFile OnChange="@ImportExcelFile" class="input form-control" />
+
+                                        <br />
+                                        <button class="btn btn-primary" @onclick="SaveVehicle">Submit</button> &nbsp;
+                                        <button class="btn btn-success">Upload File</button>
+
+                                    </div>
+                                </div>
+                           </div>
+
+                            <!-- Vehicle from excel file here -->
+                            
+                            <div class="col-sm">
+
+                                <table class="table-responsive table table-hover">
+                                    <thead>
+                                        <tr>
+                                            @foreach (DataColumn col in dataTable.Columns)
+                                            {
+                                                <th>@col.ColumnName</th>
+                                            }
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (DataRow row in dataTable.Rows)
+                                        {
+                                            <tr>
+                                                @foreach (DataColumn col in dataTable.Columns)
+                                                {
+                                                    <td>@row[col.ColumnName].ToString()</td>
+                                                }
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+                    </div>       
+    </main>
+</div>
+
+@code {
+
+    
+}

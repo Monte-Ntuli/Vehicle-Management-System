@@ -1,0 +1,43 @@
+﻿@page "/EditVehicleType"
+@page "/EditVehicleType/{id:int}"
+@inherits VehicleTypeBase
+
+<div class="container">
+    <main>
+        <div class="row">
+            <div class="col-8">
+                <div class="col-8">
+                    <a href="VehicleTypesDashboard" class="nav-link text-black link-dark">
+                        <img src="iCONS/arrow_back_FILL0_wght400_GRAD0_opsz48.png" class="rounded-circle">
+                    </a>
+
+                    <h1>Edit Vehicle Type</h1>
+
+                    <div class="container">
+                        <div class="card shadow">
+                            <div class="card-body">
+                                <form>
+                                    @foreach (var vehicleType in VehicleTypes)
+                                    {
+                                        if (vehicleType.VehicleTypeID == ID)
+                                        {
+                                            <div class="form-group col-md-8">
+                                                <label for="inputTitle"> @vehicleType.VehicleTypeTitle </label>
+                                                <input type="text" class="form-control" id="floatingInput" placeholder="Vehicle Type Title" @bind-value="updateVehicleType.VehicleTypeTitle"></input>
+                                            </div>
+                                            <br />
+                                        }
+                                    }
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+
+@code {
+
+}

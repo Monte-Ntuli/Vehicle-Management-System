@@ -1,0 +1,43 @@
+﻿@page "/ViewVehicleModelType"
+@page "/ViewVehicleModelType/{ID:int}"
+@inherits VehicleMakeBase;
+
+<div class="container">
+    <main>
+        <div class="row">
+            <div class="col-8">
+                <div class="container">
+                    <a href="VehicleTypesDashboard" class="nav-link text-black link-dark">
+                        <img src="iCONS/arrow_back_FILL0_wght400_GRAD0_opsz48.png" class="rounded-circle">
+                    </a>
+
+                    <h1>View Vehicle Make</h1>
+
+                    <div class="container">
+                        <div class="card shadow">
+                            <div class="card-body">
+                                <form>
+                                    @foreach (var vehicleType in VehicleModelTypes)
+                                    {
+                                        if (vehicleType.VehicleMakeID == ID)
+                                        {
+                                            <div class="form-group col-md-8">
+                                                <label for="inputTitle"> Vehicle Type Title : </label>
+                                                <label for="inputTitle"> @vehicleType.VehicleMakeTitle </label>
+                                            </div>
+                                            <br />
+                                        }
+                                    }
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+
+@code {
+
+}

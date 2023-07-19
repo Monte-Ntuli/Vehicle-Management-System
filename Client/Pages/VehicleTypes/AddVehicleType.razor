@@ -1,0 +1,43 @@
+﻿@page "/AddVehicleType"
+@inherits VehicleTypeBase
+
+<div>
+    <main class="">
+        <div class="row">
+
+            <!-- This is the main page content -->
+            <div class="col-8">
+                <div class="col-8">
+                    <a href="VehicleTypesDashboard" class="nav-link text-black link-dark">
+                        <img src="iCONS/arrow_back_FILL0_wght400_GRAD0_opsz48.png" class="rounded-circle">
+                    </a>
+                    <h1>Add Vehicle Type</h1>
+                    <br />
+                    <div class="col-md-8 mb-8">
+                        <div class="card shadow">
+                            <div class="card-body">
+                                <form>
+                                    <div class="form-row">
+                                        <div class="form-group col-md-8">
+                                            <label for="inputTitle">Vehicle Type Name</label>
+                                            <input type="text" class="form-control" id="floatingInput" placeholder="ABC 123 CD" @bind-value="CreateVehicleType.VehicleTypeTitle">
+                                        </div>
+                                        
+                                    </div>
+                                    <br />
+                                    <button class="btn btn-primary" @onclick="SaveVehicleType">Submit</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Vehicle stats here -->
+                </div>
+            </div>
+        </div>
+
+    </main>
+</div>
+
+@code {
+
+}

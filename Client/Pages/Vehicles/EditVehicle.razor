@@ -1,0 +1,77 @@
+﻿@page "/EditVehicle"
+@page "/EditVehicle/{ID:int}"
+@inherits VehiclesBase
+@inject NavigationManager navMan;
+
+<div>
+    <main class="">
+        <div class="row">
+            <!-- This is the main page content -->
+            <div class="col-8">
+                <div class="col-8">
+                    <a href="VehiclesDashboard" class="nav-link text-black link-dark">
+                        <img src="iCONS/arrow_back_FILL0_wght400_GRAD0_opsz48.png" class="rounded-circle">
+                    </a>
+                    <h1>Edit Vehicle</h1>
+                    <br />
+                    <div class="col-md-8 mb-8">
+                        <div class="card shadow">
+                            <div class="card-body">
+                                <form>
+                                    @foreach (var item in Vehicles)
+                                    {
+                                        if (item.VehicleID == ID)
+                                        {
+                                            <div class="form-row">
+                                                <div class="form-group col-md-8">
+                                                    <label for="inputTitle"> @item.VehicleReg </label>
+                                                    <input type="text" class="form-control" id="floatingInput" placeholder="Vehicle Registration" @bind-value="updateVehicle.VehicleReg"></input>
+                                                </div>
+                                                <br />
+                                                <div class="form-group col-md-8">
+                                                    <label for="inputTitle">@item.VinNumber </label>
+                                                    <input type="text" class="form-control" id="floatingInput" placeholder="Vin Number" @bind-value="updateVehicle.VinNumber"></input>
+                                                </div>
+                                                <br />
+                                                <div class="form-group col-md-8">
+                                                    <label for="inputTitle">Vehicle Model </label>
+                                                    <select id="inputVehicleModel" class="form-control" @bind="updateVehicle.VehicleModelType"> 
+
+                                                        @foreach (var model in VehicleModelTypes)
+                                                        {
+                                                            <option @key="@model.VehicleMakeID" value="@model.VehicleMakeID">@model.VehicleMakeTitle</option>
+                                                        }
+
+                                                    </select>
+                                                </div>
+                                                <br />
+                                                <div class="form-group col-md-8">
+                                                    <label for="inputType">Vehicle Type</label>
+                                                    <select id="inputType" class="form-control" @bind="updateVehicle.VehicleTypeID">
+
+                                                        @foreach (var type in VehicleTypes)
+                                                        {
+                                                            <option @key="@type.VehicleTypeID" value="@type.VehicleTypeID">@type.VehicleTypeTitle</option>
+                                                        }
+                                                    </select>
+                                                </div>
+                                                
+                                            </div>
+                                        }
+                                        
+                                    }
+                                    <br />
+                                    <button class="btn btn-primary" @onclick="UpdateVehicle">Submit</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+
+@code {
+
+}

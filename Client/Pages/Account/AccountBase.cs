@@ -87,6 +87,7 @@ namespace BlazorApp1.Client.Pages.Account
             if (checker == false)
             {
                 await JSRuntime.InvokeVoidAsync("alert", "Failed to register");
+                NavMan.NavigateTo("Register");
             }
 
         }

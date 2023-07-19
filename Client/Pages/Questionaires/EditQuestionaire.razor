@@ -1,0 +1,55 @@
+﻿@page "/EditQuestionaire"
+@page "/EditQuestionaire/{ID:int}"
+@inherits QuestionaireBase
+@inject NavigationManager navMan;
+@using MudBlazor
+
+<div>
+    
+    <main class="">
+        <div class="row">
+
+            <!-- This is the main page content -->
+            <div class="col-8">
+                <div class="col-8">
+                <a href="QuestionairesDashboard" class="nav-link text-black link-dark">
+                        <img src="iCONS/arrow_back_FILL0_wght400_GRAD0_opsz48.png" class="rounded-circle">
+                </a>
+                    @foreach (var item in Questionaires)
+                    {
+                        if (item.QuestionaireID == ID)
+                        {
+                            <h1>Editing @item.Title</h1>
+                            <br />
+                            <MudCard Class="card shadow">
+                                <MudCardContent Class="card-body">
+                                    <MudItem Class="input-group mb-3">
+                                        <input type="text" class="form-control" placeholder="Questionaire Title" aria-label="Question" aria-describedby="basic-addon2">
+                                        <MudItem class="input-group-append">
+                                                <button class="btn btn-primary" type="button">Update Questionaire</button>
+                                        </MudItem>
+                                    </MudItem>
+                                     <br>
+                                    <MudItem class="input-group mb-3">
+                                        <MudTextField Label="Question" Class="form-control" Variant="Variant.Outlined"
+                                        @bind-Value="createQuestionDTO.Title" For="@(() => createQuestionDTO.Title)"
+                                                      Placeholder="Question" />
+                                        <MudItem class="input-group-append">
+                                            <button class="btn btn-primary" type="button" @onclick="CreateQuestion">Add Question</button>
+                                        </MudItem>
+                                     </MudItem>
+                                </MudCardContent>
+                            </MudCard>
+                        }
+                    }
+            </div>
+            </div>
+        </div>
+
+    </main>
+
+</div>
+
+@code {
+
+}

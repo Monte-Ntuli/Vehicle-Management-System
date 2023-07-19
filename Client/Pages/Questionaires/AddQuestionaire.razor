@@ -1,0 +1,59 @@
+﻿@page "/AddQuestionaire"
+@inherits QuestionaireBase
+@inject NavigationManager navMan;
+@using MudBlazor
+
+<div>
+    
+    <main class="">
+        <div class="row">
+            
+            <!-- This is the main page content -->
+            <div class="col-8">
+                <a href="QuestionairesDashboard" class="nav-link text-black link-dark">
+                        <img src="iCONS/arrow_back_FILL0_wght400_GRAD0_opsz48.png" class="rounded-circle">
+                    </a>
+                <h1>Add Questionaire</h1>
+                <br />
+                <div class="col-md-7 mb-7">
+                    <MudCard Class="card shadow">
+                        <MudCardContent Class="card-body">
+                            <MudForm>
+                                <div class="form-row">
+                                    <MudItem Class="form-group col-md-7">
+                                            <MudTextField Label="Name" Class="form-control" Variant="Variant.Outlined"
+                                        @bind-Value="createQuestionaireDTO.Title" For="@(() => createQuestionaireDTO.Title)"
+                                        Placeholder="@createQuestionaireDTO.Title" />
+                                    </MudItem>
+                                    <br />
+                                    <MudItem Class="form-group col-md-8">
+                                        <label for="inputType">Vehicle Type</label>
+                                        <select id="inputType" class="form-control" @bind="createQuestionaireDTO.VehicleTypeID">
+
+                                            @foreach (var type in VehicleTypes)
+                                            {
+                                                if (type.hasQuestionaire == false)
+                                                {
+                                                    <option @key="@type.VehicleTypeID" value="@type.VehicleTypeID">@type.VehicleTypeTitle</option>
+                                                }
+                                            }
+                                        </select>
+                                    </MudItem>
+
+                                </div>
+                                <br />
+                                <button class="btn btn-primary" @onclick="SaveQuestionaire">Submit</button>
+                            </MudForm>
+                        </MudCardContent>
+                    </MudCard>
+                </div>
+                
+            </div>
+        </div>
+
+    </main>
+</div>
+
+@code {
+
+}

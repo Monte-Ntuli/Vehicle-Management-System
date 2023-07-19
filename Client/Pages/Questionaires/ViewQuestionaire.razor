@@ -1,0 +1,53 @@
+﻿@page "/ViewQuestionaire"
+@page "/ViewQuestionaire/{ID:int}"
+@inherits QuestionaireBase
+@inject NavigationManager navMan;
+
+<div>
+    
+
+    <main class="">
+        <div class="row">
+            
+
+            <!-- This is the main page content -->
+            <div class="col-8">
+               <div class="col-8">
+                <a href="QuestionairesDashboard" class="nav-link text-black link-dark">
+                        <img src="iCONS/arrow_back_FILL0_wght400_GRAD0_opsz48.png" class="rounded-circle">
+                    </a>
+                    @foreach (var item in Questionaires)
+                    {
+                        if (item.QuestionaireID == ID)
+                        {
+                            <h1>Viewing @item.Title</h1>
+                            <br />
+                            <div class="card shadow">
+                                <div class="card-body">
+                                    @foreach (var question in Questions)
+                                {
+                                    if (question.QuestionaireID == ID)
+                                    {
+                                            <ul class="list-unstyled">
+                                                <li class="list-group-item">
+                                                        @question.Title
+                                                </li>
+                                            </ul>
+                                    }
+                                }
+                                </div>
+                            </div>
+                        }
+                    }
+                    
+            </div>
+            </div>
+        </div>
+
+    </main>
+
+</div>
+
+@code {
+
+}

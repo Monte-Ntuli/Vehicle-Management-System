@@ -1,0 +1,75 @@
+﻿@page "/AddEmployee"
+@inherits EmployeeBase
+@inject NavigationManager navMan;
+@using MudBlazor
+
+        <div>
+            <!-- This is the main page content -->
+            <div class="col-8">
+                <MudItem Class="col-8">
+                    <a href="EmployeeDashboard" class="nav-link text-black link-dark">
+                        <img src="iCONS/arrow_back_FILL0_wght400_GRAD0_opsz48.png" class="rounded-circle">
+                    </a>
+                    <h1>Add Employee</h1>
+                </MudItem>
+
+                <br />
+                <MudCard Class="col-md-8 border-right">  
+                    <div class="p-3">
+                        <MudForm>
+
+                            <MudItem Class="form-floating">
+                                <MudTextField Label="Name" Class="form-control" Variant="Variant.Outlined"
+                                    @bind-Value="createEmployeeDTO.FirstName" For="@(() => createEmployeeDTO.FirstName)" Placeholder="John" />
+                            </MudItem>
+                            <br />
+                            <MudItem Class="form-floating">
+                                <MudTextField Label="Surname" Class="form-control" Variant="Variant.Outlined"
+                                @bind-Value="createEmployeeDTO.LastName" For="@(() => createEmployeeDTO.LastName)" Placeholder="Doe" />
+                            </MudItem>
+                            <br />
+                            <MudItem Class="form-floating">
+                                <MudTextField Label="Email address" Class="form-control" Variant="Variant.Outlined"
+                                @bind-Value="createEmployeeDTO.Email" For="@(() => createEmployeeDTO.Email)" Placeholder="johndoe@example.com" />
+                            </MudItem>
+                            <br />
+                                <MudItem Class="form-floating">
+                                    <MudTextField Label="Phone Number" Class="form-control" Variant="Variant.Outlined"
+                                    @bind-Value="createEmployeeDTO.PhoneNum" For="@(() => createEmployeeDTO.PhoneNum)" Placeholder="078 123 4567" />
+                                    
+                                </MudItem>
+                            <br />
+                            <MudItem Class="form-floating">
+                                <MudTextField Label="Role" Class="form-control" Variant="Variant.Outlined"
+                                @bind-Value="createEmployeeDTO.Role" For="@(() => createEmployeeDTO.Role)" Placeholder="Employee" />
+                            </MudItem>
+                            <br />
+                            <MudItem Class="form-floating">
+                                <MudTextField Label="Password" Class="form-control" Variant="Variant.Outlined"
+                                @bind-Value="createEmployeeDTO.Password" For="@(() => createEmployeeDTO.Password)" Placeholder="Password" />
+                            </MudItem>
+                            <br />
+                            <MudItem Class="form-floating">
+                                <button class="btn btn-lg btn-primary" type="submit" @onclick="AddEmployee">Add </button>
+                                &nbsp;
+                                &nbsp;
+                                <button class="btn btn-lg btn-warning" @onclick="Back">Back </button>
+                                <br />
+                            </MudItem>
+                            
+                        </MudForm>
+                    </div>
+                   
+                    <br />
+                </MudCard>
+
+            </div>
+        </div>
+
+@code {
+
+    public void Back()
+    {
+        navMan.NavigateTo("EmployeeDashboard");
+    }
+}

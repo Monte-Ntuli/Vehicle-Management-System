@@ -1,0 +1,95 @@
+﻿@page "/ViewVehicle"
+@page "/ViewVehicle/{ID:int}"
+@inherits VehiclesBase;
+@inject NavigationManager navMan;
+
+<div>
+    
+    <main class="container">
+        <a href="VehiclesDashboard" class="nav-link text-black link-dark">
+            <img src="iCONS/arrow_back_FILL0_wght400_GRAD0_opsz48.png" class="rounded-circle">
+        </a>
+        <h1>View Vehicle Stats</h1>
+        <div class="container">
+            <div class="row">
+                <!-- Vehicle information -->
+                <div class="col-md-5 border-right">
+                    <div class="py-3">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h4 class="text-right">Vehicle Details</h4>
+                        </div>
+                            <div class="row mt-3">
+                                @foreach (var vehicle in Vehicles)
+                                {
+                                    if (vehicle.VehicleID == ID)
+                                    {
+                                        <div class="col-md-12"><label class="labels">Vehicle Registration</label><input type="text" class="form-control" placeholder=" @vehicle.VehicleReg" disabled readonly></div>
+                                        <div class="col-md-12"><label class="labels">Vin Number</label><input type="email" class="form-control" placeholder="@vehicle.VinNumber" disabled readonly></div>
+                                        foreach (var vehicleModel in VehicleModelTypes)
+                                        {
+                                        if (vehicleModel.VehicleMakeID == vehicle.VehicleModelType)
+                                            {
+                                                <div class="col-md-12"><label class="labels">Vehicle Make</label><input type="text" class="form-control" placeholder="@vehicleModel.VehicleMakeTitle" disabled readonly></div>
+                                            }
+                                        }
+                                        foreach (var vehicleType in VehicleTypes)
+                                        {
+                                            if (vehicleType.VehicleTypeID == vehicle.VehicleTypeID)
+                                            {
+                                                <div class="col-md-12"><label class="labels">Vehicle Type</label><input type="text" class="form-control" placeholder="@vehicleType.VehicleTypeTitle" disabled readonly></div>
+                                            }
+                                        }
+                                    }
+                                    
+                                }
+                            </div>
+                            
+                        
+                    </div>
+                </div>
+                <!-- Fleet card information -->
+                <div class="col-md-5 border-right">
+                    <div class="py-3">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h4 class="text-right">Fleet Card Details</h4>
+                        </div>
+
+                         <div class="row mt-3">
+                            <div class="col-md-12"><label class="labels">Card Number</label><input type="text" class="form-control" placeholder="24553435435453" disabled readonly></div>
+                            <div class="col-md-12"><label class="labels">Customer</label><input type="text" class="form-control" placeholder="name of company" disabled readonly></div>
+                            <div class="col-md-12"><label class="labels">Vehicle Make & Model</label><input type="text" class="form-control" placeholder="BMW 320i" disabled readonly></div>
+                            <div class="col-md-12"><label class="labels">Tank Capacity</label><input type="text" class="form-control" placeholder="60L" disabled readonly></div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Reports and more information-->
+            
+            <div class="row">
+                <!-- Vehicle Report -->
+                <div class="col-md-5 border-right">
+                     <div class="py-3">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h4> Vehicle Report </h4>
+                        </div>
+                </div>
+                <!-- Vehicle Report -->
+                 <div class="col-md-5 border-right">
+                        <div class="py-3">
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <h4> Questionaire </h4>
+                            </div>
+                        </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </main>
+
+</div>
+
+@code {
+
+}

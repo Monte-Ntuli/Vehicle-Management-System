@@ -1,0 +1,117 @@
+﻿@page "/EditEmployee"
+@page "/EditEmployee/{ID:int}"
+@inherits EmployeeBase
+@using MudBlazor
+
+<div>
+    <main class="">
+        <div class="row">
+            
+            <!-- This is the main page content -->
+            <div class="col-8">
+                <div class="col-8">
+                    <a href="EmployeeDashboard" class="nav-link text-black link-dark">
+                        <img src="iCONS/arrow_back_FILL0_wght400_GRAD0_opsz48.png" class="rounded-circle">
+                    </a>
+                    <h1>Edit Employee</h1>
+                </div>
+
+                <MudCard class="row gutters-sm">
+
+                    <!-- This is the Profile Settings -->
+                    <div class="col-md-8 border-right">
+                        <div class="p-3 py-5">
+                            
+                            @foreach(var employee in Employee)
+                            {
+                                if(employee.UserID == ID)
+                                {
+                                    <MudForm Class="row mt-3">
+                                        <MudItem Class="col-md-12">
+                                            <MudTextField Label="Name" Class="form-control" Variant="Variant.Outlined"
+                                            @bind-Value="updateEmployeeDTO.FirstName" For="@(() => updateEmployeeDTO.FirstName)" 
+                                            Placeholder="@employee.FirstName" />
+                                        </MudItem>
+                                        <MudItem Class="col-md-12">
+                                            <MudTextField Label="Last Name" Class="form-control" Variant="Variant.Outlined"
+                                            @bind-Value="updateEmployeeDTO.LastName" For="@(() => updateEmployeeDTO.LastName)"
+                                                          Placeholder="@employee.LastName" />
+                                        </MudItem>
+                                        <MudItem Class="col-md-12">
+                                            <MudTextField Label="Username" Class="form-control" Variant="Variant.Outlined"
+                                            @bind-Value="updateEmployeeDTO.UserName" For="@(() => updateEmployeeDTO.UserName)"
+                                                          Placeholder="@employee.UserName" />
+                                        </MudItem>
+                                        <MudItem Class="col-md-12">
+                                            <MudTextField Label="Role" Class="form-control" Variant="Variant.Outlined"
+                                            @bind-Value="updateEmployeeDTO.Role" For="@(() => updateEmployeeDTO.Role)"
+                                                          Placeholder="@employee.Role" />
+                                        </MudItem>
+                                        <MudItem Class="col-md-12">
+                                            <MudTextField Label="Mobile Number" Class="form-control" Variant="Variant.Outlined"
+                                            @bind-Value="updateEmployeeDTO.PhoneNum" For="@(() => updateEmployeeDTO.PhoneNum)"
+                                                          Placeholder="@employee.PhoneNum" />
+                                        </MudItem>
+                                        <MudItem Class="col-md-12">
+                                            <MudTextField Label="Email Address" Class="form-control" Variant="Variant.Outlined"
+                                            @bind-Value="updateEmployeeDTO.Email" For="@(() => updateEmployeeDTO.Email)"
+                                                          Placeholder="@employee.Email" />
+                                        </MudItem>
+                                    </MudForm>
+                                }
+                            }
+
+                            <div class="mt-5 ">
+                                <button class="btn btn-primary profile-button" type="button" @onclick="EditEmployee">Save Changes</button>
+                                &nbsp; &nbsp;
+                            </div>
+                        </div>
+                    </div>
+
+                    <br />
+                    <br />
+                    <!-- This is the Profile Card on the right -->
+                    <div class="col-md-4 mb-3">
+                        <div class="card shadow">
+                            <div class="card-body">
+                                <div class="d-flex flex-column align-items-center text-center">
+                                    <img src="icons/person_FILL0_wght400_GRAD0_opsz48.png" alt="Admin" class="rounded-circle shadow" width="150">
+                                    <div class="mt-3">
+                                        <h4>John Doe</h4>
+                                        <p class="text-secondary mb-1">Full Stack Developer</p>
+                                        <p class="text-muted font-size-sm">Bay Area, San Francisco, CA</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- 
+                             <div class="p-3">
+                            <div class="d-flex justify-content-between align-items-center experience">
+                                <span>Employee Address</span><span px-3 p-1"><i></i></span></div><br>
+                             <div class="col-md-12"><label class="labels">Street Number</label><input type="text" class="form-control" placeholder="enter address line 1" value=""></div>
+                                <div class="col-md-12"><label class="labels">Street Name</label><input type="text" class="form-control" placeholder="enter address line 2" value=""></div>
+                                <div class="col-md-12"><label class="labels">Suburb</label><input type="text" class="form-control" placeholder="suburb" value=""></div>
+                                <div class="col-md-12"><label class="labels">City</label><input type="text" class="form-control" placeholder="City" value=""></div>
+                                <div class="col-md-12"><label class="labels">Province</label><input type="text" class="form-control" placeholder="Province" value=""></div>
+                            <div class="row mt-3">
+                                <div class="col-md-6"><label class="labels">Country</label><input type="text" class="form-control" placeholder="country" value=""></div>
+                                <div class="col-md-6"><label class="labels">Postal Code</label><input type="text" class="form-control" value="" placeholder="Postal Code"></div>
+                            </div>
+                        </div>
+                        -->
+                       
+                    </div>
+
+                </MudCard>
+            </div>
+        </div>
+    </main>
+</div>
+
+@code {
+
+    public void SaveChanges()
+    {
+
+    }
+}
