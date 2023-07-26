@@ -106,7 +106,6 @@ namespace BlazorApp1.Client.Pages.Account
             }
             else
             {
-                Snackbar.Add("Password must contain: 8 Characters, 1 LowerCase, 1 UpperCase, 1 number and 1 Special Character", Severity.Warning, config => { config.ShowCloseIcon = false; });
                 checker = false;
             }
         }
@@ -121,7 +120,6 @@ namespace BlazorApp1.Client.Pages.Account
             }
             else
             {
-                Snackbar.Add("Please type in valid email", Severity.Warning, config => { config.ShowCloseIcon = false; });
                 checker = false;
             }
         }

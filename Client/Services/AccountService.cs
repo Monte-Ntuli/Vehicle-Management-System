@@ -12,7 +12,7 @@ namespace BlazorApp1.Client.Services
     public class AccountService : IAccountService
     {
         [Inject]
-        public ISnackbar Snackbar { get; set; }
+        public ISnackbar _snackbar { get; set; }
 
         private readonly HttpClient _httpClient;
         private readonly NavigationManager _navMan;
@@ -22,11 +22,12 @@ namespace BlazorApp1.Client.Services
         public List<LoginDTO> LoginUsers { get; set; } = new List<LoginDTO>();
         public List<char> ApiLoginResponse { get; set; } = new List<char>();
         public HttpResponseMessage ApiResponse { get; set; } = new HttpResponseMessage();
-        public AccountService(HttpClient httpClient, NavigationManager NavMan, ILocalStorageService localStorage)
+        public AccountService(HttpClient httpClient, NavigationManager NavMan, ILocalStorageService localStorage, ISnackbar snackbar)
         {
             _httpClient = httpClient;
             _navMan = NavMan;
             _localStorage = localStorage;
+            _snackbar = snackbar;
         }
 
         #region change password
@@ -37,11 +38,11 @@ namespace BlazorApp1.Client.Services
 
             if (response == System.Net.HttpStatusCode.Accepted)
             {
-                Snackbar.Add("Password changed sucessfully", Severity.Success, config => { config.ShowCloseIcon = false; });
+                _snackbar.Add("Password changed sucessfully", Severity.Success, config => { config.ShowCloseIcon = false; });
             }
             else
             {
-                Snackbar.Add(response.ToString(), Severity.Error, config => { config.ShowCloseIcon = false; });
+                _snackbar.Add(response.ToString(), Severity.Error, config => { config.ShowCloseIcon = false; });
                 _navMan.NavigateTo("EditProfile", true);
             }
         }
@@ -55,12 +56,12 @@ namespace BlazorApp1.Client.Services
 
             if (response == System.Net.HttpStatusCode.Accepted)
             {
-                Snackbar.Add("Password reset successfully", Severity.Success, config => { config.ShowCloseIcon = false; });
+                _snackbar.Add("Password reset successfully", Severity.Success, config => { config.ShowCloseIcon = false; });
                 _navMan.NavigateTo("/", true);
             }
             else
             {
-                Snackbar.Add(response.ToString(), Severity.Error, config => { config.ShowCloseIcon = false; });
+                _snackbar.Add(response.ToString(), Severity.Error, config => { config.ShowCloseIcon = false; });
                 _navMan.NavigateTo("ForgotPasswordChange", true);
             }
         }
@@ -77,7 +78,8 @@ namespace BlazorApp1.Client.Services
             }
             else
             {
-                Snackbar.Add("Email has been sent with directions to update password", Severity.Success, config => { config.ShowCloseIcon = false; });
+                _navMan.NavigateTo("/", true);
+                _snackbar.Add("Email has been sent with directions to update password", Severity.Success, config => { config.ShowCloseIcon = false; });
             }
         }
         #endregion
@@ -90,14 +92,14 @@ namespace BlazorApp1.Client.Services
             var response = result.StatusCode;
             if (response != System.Net.HttpStatusCode.Accepted)
             {
-                Snackbar.Add(response.ToString(), Severity.Error, config => { config.ShowCloseIcon = false; });
+                _snackbar.Add(response.ToString(), Severity.Error, config => { config.ShowCloseIcon = false; });
             }
             if (response == System.Net.HttpStatusCode.Accepted)
             {
                 var data = await result.Content.ReadFromJsonAsync<List<EmployeeDTO>>();
                 _navMan.NavigateTo("/");
             }
-            Snackbar.Add(response.ToString(), Severity.Error, config => { config.ShowCloseIcon = false; });
+            _snackbar.Add(response.ToString(), Severity.Error, config => { config.ShowCloseIcon = false; });
         }
         #endregion
 
@@ -108,14 +110,15 @@ namespace BlazorApp1.Client.Services
             var response = result.StatusCode;
             if (response != System.Net.HttpStatusCode.Accepted)
             {
-                Snackbar.Add(response.ToString(), Severity.Error, config => { config.ShowCloseIcon = false; });
+                _snackbar.Add("Username or password is incorrect", Severity.Error, config => { config.ShowCloseIcon = false; });
             }
             if (response == System.Net.HttpStatusCode.MethodNotAllowed)
             {
-                Snackbar.Add(response.ToString() + " Please Confirm Email Address ", Severity.Warning, config => { config.ShowCloseIcon = false; });
+                _snackbar.Add(response.ToString() + " Please Confirm Email Address ", Severity.Warning, config => { config.ShowCloseIcon = false; });
             }
             if (response == System.Net.HttpStatusCode.Accepted)
             {
+                _snackbar.Add("Welecome", Severity.Success, config => { config.ShowCloseIcon = false; });
                 _navMan.NavigateTo("Dashboard", true);
                 //await _jsRuntime.InvokeVoidAsync("localStorage.setItem", "UserName", loginDTO.Email);
                 await _localStorage.SetItemAsync("UserName", loginDTO.Email);

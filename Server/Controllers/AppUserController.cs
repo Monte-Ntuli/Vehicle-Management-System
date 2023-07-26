@@ -176,7 +176,7 @@ namespace BlazorApp1.Server.Controllers
 
         #region Find Email User To Change Password
         [HttpPost("FindEmail")]
-        public async Task<IActionResult> FindEmail([FromBody] FindEmailRM email)
+        public async Task<IActionResult> FindEmail([FromBody] FindEmailDTO email)
         {
                 var appUser = await _userManager.FindByEmailAsync(email.Email);
                 if (appUser != null) { return Accepted(); } else { return BadRequest(); }

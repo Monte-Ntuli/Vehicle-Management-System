@@ -8,7 +8,7 @@
 
 <MudCard Class="align-content-center; container-sm">
     <img class="mb-4" src="images/firsttechlogo.png" alt="" width="200" height="200">
-    <MudForm @bind-Errors="@errors">
+    <MudForm @bind-Errors="@errors" @ref="form">
 
         <a href="" class="nav-link text-black link-dark">
             <img src="iCONS/arrow_back_FILL0_wght400_GRAD0_opsz48.png" class="rounded-circle">
@@ -16,47 +16,118 @@
         <h1 class="h3 mb-3 fw-normal">Please Register in</h1>
 
         <MudItem Class="form-floating">
-            <MudTextField Label="Name" Class="form-control" Required="true" RequiredError="Name is required!"
+            <MudTextField Label="Name" Class="form-control" Required="true" RequiredError="First Name is required!"
             @bind-Value="employee.FirstName" For="@(() => employee.FirstName)" Placeholder="John" InputType="InputType.Text" />
+            <br />
+            @foreach (var error in errors)
+            {
+                if (error.Contains("First"))
+                {
+                    <MudText Color="@Color.Error">@error</MudText>
+                }
+
+            }
         </MudItem>
         <br />
         <MudItem Class="form-floating">
             <MudTextField Label="Last name" Class="form-control" Required="true" RequiredError="Last name is required!"
             @bind-Value="employee.LastName" For="@(() => employee.LastName)" Placeholder="Doe" InputType="InputType.Text"/>
+            <br />
+            @foreach (var error in errors)
+            {
+                if (error.Contains("Last"))
+                {
+                    <MudText Color="@Color.Error">@error</MudText>
+                }
+
+            }
         </MudItem>
         <br />
         <MudItem Class="form-floating">
             <MudTextField Label="Email address" Class="form-control" Required="true" RequiredError="Email is required!"
             @bind-Value="employee.Email" For="@(() => employee.Email)" Placeholder="johndoe@example.com" InputType="InputType.Email"
                           Validation="@(new EmailAddressAttribute() {ErrorMessage = "The email address is invalid"})" />
+            <br />
+            @foreach (var error in errors)
+            {
+                if (error.Contains("Email"))
+                {
+                    <MudText Color="@Color.Error">@error</MudText>
+                }
+
+            }
         </MudItem>
         <br />
         <MudItem Class="form-floating">
             <MudTextField Label="Confirm Email address" Class="form-control" Required="true" RequiredError="Please confirm email!"
             @bind-Value="confirmEmail" For="@(() => confirmEmail)" Placeholder="johndoe@example.com" InputType="InputType.Email"
                           Validation="@(new EmailAddressAttribute() {ErrorMessage = "The email address is invalid"})" />
+            <br />
+            @foreach (var error in errors)
+            {
+                if (error.Contains("Email"))
+                {
+                    <MudText Color="@Color.Error">@error</MudText>
+                }
+
+            }
         </MudItem>
         <br />
         <MudItem Class="form-floating">
             <MudTextField Label="Phone Number" Class="form-control" Required="true" RequiredError="Phone Number is required!"
             @bind-Value="employee.PhoneNum" For="@(() => employee.PhoneNum)" Placeholder="082 123 4567" InputType="InputType.Number" />
+            <br />
+            @foreach (var error in errors)
+            {
+                if (error.Contains("Phone"))
+                {
+                    <MudText Color="@Color.Error">@error</MudText>
+                }
+
+            }
         </MudItem>
         <br />
         <MudItem Class="form-floating">
             <MudTextField Label="Password" Class="form-control" Required="true" RequiredError="Password is required!"
             @bind-Value="confirmPassword" For="@(() => confirmPassword)" Placeholder="Password" InputType="InputType.Password"
                           Validation="@(new Func<string, IEnumerable<string>>(PasswordStrength))" @ref="pwField1" />
+            <br />
+            @foreach (var error in errors)
+            {
+                if (error.Contains("Password"))
+                {
+                    <MudText Color="@Color.Error">@error</MudText>
+                }
+
+            }
         </MudItem>
         <br />
         <MudItem Class="form-floating">
             <MudTextField Label="Confirm Password" Class="form-control" Required="true" RequiredError="Please confirm password!"
             @bind-Value="employee.Password" For="@(() => employee.Password)" Placeholder="Password" InputType="InputType.Password"
                           Validation="@(new Func<string, IEnumerable<string>>(PasswordStrength))" @ref="pwField1" />
+            @foreach (var error in errors)
+            {
+                if (error.Contains("Password"))
+                {
+                    <MudText Color="@Color.Error">@error</MudText>
+                }
+
+            }
         </MudItem>
         <br />
         <MudItem Class="form-floating">
             <MudTextField Label="Company Name" Class="form-control" Required="true" RequiredError="Company name is required!"
             @bind-Value="employee.Company" For="@(() => employee.Company)" Placeholder="Company" InputType="InputType.Text" />
+            <br/>
+            @foreach (var error in errors)
+            {
+                if (error.Contains("Company"))
+                {
+                    <MudText Color="@Color.Error">@error</MudText>
+                }
+
+            }
         </MudItem>
         <br />
         <br />
@@ -64,15 +135,6 @@
         <br />
         <br />
     </MudForm>
-    <MudItem xs="12" sm="5">
-        <MudPaper Class="pa-4 mud-height-full">
-            <MudText Typo="Typo.subtitle2">@($"Errors ({errors.Length})")</MudText>
-                @foreach (var error in errors)
-            {
-                <MudText Color="@Color.Error">@error</MudText>
-            }
-        </MudPaper>
-    </MudItem>
     <br />
 </MudCard>
 
