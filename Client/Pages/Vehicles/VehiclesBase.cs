@@ -44,7 +44,7 @@ namespace BlazorApp1.Client.Pages.Vehicles
 
         public IEnumerable<VehicleDTO> Vehicles { get; set; } = new List<VehicleDTO>();
         public IEnumerable<VehicleTypeDTO> VehicleTypes { get; set; } = new List<VehicleTypeDTO>();
-        public IEnumerable<VehicleMakeDTO> VehicleModelTypes { get; set; } = new List<VehicleMakeDTO>();
+        public IEnumerable<VehicleMakeDTO> VehicleMake { get; set; } = new List<VehicleMakeDTO>();
         public IEnumerable<VehicleDTO> Vehicle { get; set; } = new List<VehicleDTO>();
         public HttpResponseMessage ApiResult { get; set; }
 
@@ -60,7 +60,7 @@ namespace BlazorApp1.Client.Pages.Vehicles
             company = email.Replace("\'", string.Empty).Trim();
             Vehicles = await VehicleService.GetVehicleByCompany(company);
             VehicleTypes = await vehicleTypeService.GetVehicleTypeByCompany(company);
-            VehicleModelTypes = await vehicleModelTypeService.GetVehicleModelTypeByCompany(company);
+            VehicleMake = await vehicleModelTypeService.GetVehicleModelTypeByCompany(company);
         }
 
         protected override async Task OnParametersSetAsync()
@@ -78,7 +78,7 @@ namespace BlazorApp1.Client.Pages.Vehicles
             {
                 Snackbar.Add("Please select Vehicle Model", Severity.Warning, config => { config.ShowCloseIcon = false; });
             }
-            if (CreateVehicle.VehicleModelType == 0 || CreateVehicle.VehicleTypeID == 0 || string.IsNullOrEmpty(CreateVehicle.VehicleReg) || string.IsNullOrEmpty(CreateVehicle.VinNumber))
+            if (string.IsNullOrEmpty(CreateVehicle.VehicleReg) || string.IsNullOrEmpty(CreateVehicle.VinNumber))
             {
                 Snackbar.Add("Please make sure all values are filled", Severity.Warning, config => { config.ShowCloseIcon = false; });
             }
@@ -89,28 +89,110 @@ namespace BlazorApp1.Client.Pages.Vehicles
             }
         }
 
-        public async Task AddVehicleMake()
+        public async Task AddVehicleMake(ChangeEventArgs e)
         {
-            if(VehicleModelTypes.Count() == 0)
+            var vehicleMakeID = e.Value.ToString();
+            if(VehicleMake.Count() == 0)
             {
                 Snackbar.Add("Please Create Vehicle Make", Severity.Warning, config => { config.ShowCloseIcon = false; });
                 NavMan.NavigateTo("AddVehicleModelType");
             }
+            else
+            {
+                if(int.Parse(vehicleMakeID) != 0)
+                {
+                    CreateVehicle.VehicleModelType = int.Parse(vehicleMakeID);
+                }
+            }
             
         }
-        public async Task AddVehicleModel()
+        public async Task AddVehicleModel(ChangeEventArgs e)
         {
+            var vehicleModelID = e.Value.ToString();
             if (VehicleTypes.Count() == 0)
             {
                 Snackbar.Add("Please Create Vehicle Model", Severity.Warning, config => { config.ShowCloseIcon = false; });
                 NavMan.NavigateTo("AddVehicleType");
             }
+            else
+            {
+                if (int.Parse(vehicleModelID) != 0)
+                {
+                    CreateVehicle.VehicleTypeID = int.Parse(vehicleModelID);
+                } 
+            }
         }
         #region update vehicle
+
+        public async Task UpdateVehicleMake(ChangeEventArgs e)
+        {
+            var vehicleMakeID = e.Value.ToString();
+            if (VehicleMake.Count() == 0)
+            {
+                Snackbar.Add("Please Create Vehicle Make", Severity.Warning, config => { config.ShowCloseIcon = false; });
+                NavMan.NavigateTo("AddVehicleModelType");
+            }
+            else
+            {
+                if (int.Parse(vehicleMakeID) != 0)
+                {
+                    updateVehicle.VehicleModelType = int.Parse(vehicleMakeID);
+                }
+            }
+        }
+
+        public async Task UpdateVehicleModel(ChangeEventArgs e)
+        {
+            var vehicleModelID = e.Value.ToString();
+            if (VehicleTypes.Count() == 0)
+            {
+                Snackbar.Add("Please Create Vehicle Model", Severity.Warning, config => { config.ShowCloseIcon = false; });
+                NavMan.NavigateTo("AddVehicleType");
+            }
+            else
+            {
+                if (int.Parse(vehicleModelID) != 0)
+                {
+                    updateVehicle.VehicleTypeID = int.Parse(vehicleModelID);
+                }
+            }
+        }
         public async Task UpdateVehicle()
         {
             updateVehicle.VehicleID = ID;
-            await VehicleService.Update(updateVehicle);
+            if (updateVehicle.VehicleModelType == 0)
+            {
+                Snackbar.Add("Please select Vehicle Make", Severity.Warning, config => { config.ShowCloseIcon = false; });
+            }
+            if (updateVehicle.VehicleTypeID == 0)
+            {
+                Snackbar.Add("Please select Vehicle Model", Severity.Warning, config => { config.ShowCloseIcon = false; });
+            }
+            if (string.IsNullOrEmpty(updateVehicle.VehicleReg))
+            {
+                foreach (var item in Vehicles)
+                {
+                    if (item.VehicleID == ID)
+                    {
+                        updateVehicle.VehicleReg = item.VehicleReg;
+                    }
+                }
+            }
+            if(string.IsNullOrEmpty(updateVehicle.VinNumber))
+            {
+                foreach (var item in Vehicles)
+                {
+                    if (item.VehicleID == ID)
+                    {
+                        updateVehicle.VinNumber = item.VinNumber;
+                    }
+                }
+            }
+            else
+            {
+                await VehicleService.Update(updateVehicle);
+                NavMan.NavigateTo("VehiclesDashboard");
+            }
         }
         #endregion
 
@@ -223,7 +305,7 @@ namespace BlazorApp1.Client.Pages.Vehicles
                     }
 
                     // display text instead of number
-                    foreach (var item in VehicleModelTypes)
+                    foreach (var item in VehicleMake)
                     {
                         if (item.VehicleMakeID == data.ElementAt(i).VehicleModelType)
                         {

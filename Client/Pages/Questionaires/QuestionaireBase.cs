@@ -67,11 +67,29 @@ namespace BlazorApp1.Client.Pages.Questionaires
         public async Task SaveQuestionaire()
         {
             createQuestionaireDTO.Company = company;
-            await QuestionaireService.CreateQuestionaire(createQuestionaireDTO);
-            Snackbar.Add("Questionaire Added Successfully", Severity.Success, config => { config.ShowCloseIcon = false; });
-
+            if (string.IsNullOrEmpty(createQuestionaireDTO.Title))
+            {
+                Snackbar.Add("Please add title to continue", Severity.Warning, config => { config.ShowCloseIcon = false; });
+            }
+            if (createQuestionaireDTO.VehicleTypeID == 0)
+            {
+                Snackbar.Add("Please add vehicle type to continue", Severity.Warning, config => { config.ShowCloseIcon = false; });
+            }
+            else
+            {
+                await QuestionaireService.CreateQuestionaire(createQuestionaireDTO);
+            }
         }
 
+        public async Task AddVehicleType()
+        {
+            if (VehicleTypes.Count() == 0)
+            {
+                Snackbar.Add("Please Create Vehicle Model", Severity.Warning, config => { config.ShowCloseIcon = false; });
+                NavMan.NavigateTo("AddVehicleType");
+            }
+            
+        }
         protected override async Task OnParametersSetAsync()
         {
             Questionare = await QuestionaireService.GetQuestionaireByID(ID);

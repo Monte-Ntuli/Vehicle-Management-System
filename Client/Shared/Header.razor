@@ -1,18 +1,17 @@
-﻿@page "/Header"
-@inject NavigationManager navMan;
+﻿@inject NavigationManager navMan;
 
 <header class="py-3 mb-3 border-bottom">
     <div class="container-fluid d-grid gap-3 align-items-center" style="grid-template-columns: 1fr 2fr;">
         <!-- This is the Drop Down Menu -->
         <div class="dropdown">
-            <a href="#" class="d-flex align-items-center col-lg-4 mb-2 mb-lg-0 link-dark text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+            <a href="Dashboard" class="d-flex align-items-center col-lg-4 mb-2 mb-lg-0 link-dark text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                 <img src="images/firstTechDigitalLogo.png" alt="" width="32" height="32" class="rounded-circle shadow">
                 More Insights
             </a>
             <ul class="dropdown-menu text-small shadow" style="">
-                <li><a class="dropdown-item" >Overview</a></li>
-                <li><a class="dropdown-item" >Inventory</a></li>
-                <li><a class="dropdown-item" >Analytics</a></li>
+                <li><a href="Dashboard" class="dropdown-item" >Overview</a></li>
+                <li><a href="Dashboard" class="dropdown-item" >Inventory</a></li>
+                <li><a href="Dashboard" class="dropdown-item" >Analytics</a></li>
             </ul>
         </div>
         <!-- This is the Search Button -->

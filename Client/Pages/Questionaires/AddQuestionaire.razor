@@ -27,14 +27,14 @@
                                     </MudItem>
                                     <br />
                                     <MudItem Class="form-group col-md-8">
-                                        <label for="inputType">Vehicle Type</label>
-                                        <select id="inputType" class="form-control" @bind="createQuestionaireDTO.VehicleTypeID">
+                                        <label for="VehicleTypeQuestionaire">Vehicle Type</label>
+                                        <select id="VehicleTypeQuestionaire" class="form-control" @bind="createQuestionaireDTO.VehicleTypeID" @onclick="AddVehicleType">
 
                                             @foreach (var type in VehicleTypes)
                                             {
                                                 if (type.hasQuestionaire == false)
                                                 {
-                                                    <option @key="@type.VehicleTypeID" value="@type.VehicleTypeID">@type.VehicleTypeTitle</option>
+                                                    <option @key="@type.VehicleTypeID" value="@type.VehicleTypeID" bind="createQuestionaireDTO.VehicleTypeID">@type.VehicleTypeTitle</option>
                                                 }
                                             }
                                         </select>

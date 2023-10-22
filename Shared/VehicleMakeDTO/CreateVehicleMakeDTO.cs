@@ -8,7 +8,7 @@ namespace BlazorApp1.Shared.VehicleMakeDTO
 { 
     public class CreateVehicleMakeDTO
     {
-        public string VehicleModelTitle { get; set; }
+        public string VehicleMakeTitle { get; set; }
         public string Company { get; set; }
     }
 }

@@ -118,7 +118,7 @@ namespace BlazorApp1.Client.Services
             }
             if (response == System.Net.HttpStatusCode.Accepted)
             {
-                _snackbar.Add("Welecome", Severity.Success, config => { config.ShowCloseIcon = false; });
+                _snackbar.Add("Welcome", Severity.Success, config => { config.ShowCloseIcon = false; });
                 _navMan.NavigateTo("Dashboard", true);
                 //await _jsRuntime.InvokeVoidAsync("localStorage.setItem", "UserName", loginDTO.Email);
                 await _localStorage.SetItemAsync("UserName", loginDTO.Email);

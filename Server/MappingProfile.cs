@@ -45,7 +45,7 @@ namespace BlazorApp1.Server
             CreateMap<VehicleEntity, UpdateVehicleDTO>().ReverseMap();
             #endregion
 
-            #region Vehicle Model Type Maps
+            #region Vehicle Make Maps
             CreateMap<VehicleMakeEntity, VehicleMakeRM>().ReverseMap();
             CreateMap<VehicleMakeEntity, CreateVehicleMakeDTO>().ReverseMap();
             CreateMap<VehicleMakeEntity, VehicleMakeModel>().ReverseMap();

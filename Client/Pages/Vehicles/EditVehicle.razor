@@ -34,10 +34,10 @@
                                                 </div>
                                                 <br />
                                                 <div class="form-group col-md-8">
-                                                    <label for="inputTitle">Vehicle Model </label>
-                                                    <select id="inputVehicleModel" class="form-control" @bind="updateVehicle.VehicleModelType"> 
-
-                                                        @foreach (var model in VehicleModelTypes)
+                                                    <label for="inputTitle">Vehicle Make </label>
+                                                    <select id="inputVehicleModel" class="form-control" @onchange="UpdateVehicleMake">
+                                                        <option value="0">select</option>
+                                                        @foreach (var model in VehicleMake)
                                                         {
                                                             <option @key="@model.VehicleMakeID" value="@model.VehicleMakeID">@model.VehicleMakeTitle</option>
                                                         }
@@ -46,9 +46,9 @@
                                                 </div>
                                                 <br />
                                                 <div class="form-group col-md-8">
-                                                    <label for="inputType">Vehicle Type</label>
-                                                    <select id="inputType" class="form-control" @bind="updateVehicle.VehicleTypeID">
-
+                                                    <label for="inputType">Vehicle Model</label>
+                                                    <select id="inputType" class="form-control" @onchange="UpdateVehicleModel">
+                                                        <option value="0">select</option>
                                                         @foreach (var type in VehicleTypes)
                                                         {
                                                             <option @key="@type.VehicleTypeID" value="@type.VehicleTypeID">@type.VehicleTypeTitle</option>
