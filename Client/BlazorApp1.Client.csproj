@@ -9,6 +9,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="Pages\Reports\ViewReports.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Blazored.LocalStorage" Version="4.3.0" />
     <PackageReference Include="Blazored.SessionStorage" Version="2.3.0" />
     <PackageReference Include="bootstrap" Version="5.2.3" />
@@ -26,6 +30,18 @@
 
   <ItemGroup>
     <ServiceWorker Include="wwwroot\service-worker.js" PublishedContent="wwwroot\service-worker.published.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Pages\Reports\ViewReports.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="Pages\Reports\ViewReports.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Pages\Reports\ViewReports.razor" />
   </ItemGroup>
 
 </Project>

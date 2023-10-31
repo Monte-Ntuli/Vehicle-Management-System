@@ -19,9 +19,10 @@
 
                  @foreach (var item in Questionaires)
                  {
-                    <h1> Now Viewing @item.Title</h1>
+                   
                      if (item.QuestionaireID == ID)
                      {
+                        <h1> Now Viewing @item.Title</h1>
                         <div class="card bg-white shadow">
                             <div class="table-responsive">
                                 <table class="table table-hover">
