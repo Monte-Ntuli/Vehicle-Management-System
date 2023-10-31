@@ -38,9 +38,9 @@ namespace BlazorApp1.Client.Repos
                     await _dbContext.AddAsync(entity);
                     await _dbContext.SaveChangesAsync();
                 }
-                else return null;
+                else return NewVehicle;
             }
-            return null;
+            return NewVehicle;
         }
         private int GenerateVehicleID()
         {

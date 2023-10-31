@@ -28,11 +28,7 @@ namespace BlazorApp1.Server.Controllers
         public async Task<IActionResult> Create([FromBody] CreateVehicleDTO vehicle)
         {
             var NewVehicle = await _unitOfWork.Vehicle.AddAsync(_mapper.Map<VehicleEntity>(vehicle));
-            if (NewVehicle != null)
-            {
-                return Accepted(vehicle);
-            }
-            else return BadRequest();
+            return Accepted(vehicle);
 
         }
         #endregion
