@@ -12,35 +12,57 @@
 
             <!-- This is the main page content -->
             <div class="col-8">
-               <div class="col-8">
                 <a href="QuestionairesDashboard" class="nav-link text-black link-dark">
                         <img src="iCONS/arrow_back_FILL0_wght400_GRAD0_opsz48.png" class="rounded-circle">
                     </a>
-                    @foreach (var item in Questionaires)
-                    {
-                        if (item.QuestionaireID == ID)
-                        {
-                            <h1>Viewing @item.Title</h1>
-                            <br />
-                            <div class="card shadow">
-                                <div class="card-body">
-                                    @foreach (var question in Questions)
-                                {
-                                    if (question.QuestionaireID == ID)
-                                    {
-                                            <ul class="list-unstyled">
-                                                <li class="list-group-item">
+               
+
+                 @foreach (var item in Questionaires)
+                 {
+                    <h1> Now Viewing @item.Title</h1>
+                     if (item.QuestionaireID == ID)
+                     {
+                        <div class="card bg-white shadow">
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr class="table-primary">
+                                            <th scope="col">Question Title</th>
+                                            <th scope="col">Edit</th>
+                                            <th scope="col">Delete</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var question in Questions)
+                                        {
+                                            if (question.QuestionaireID == ID)
+                                            {
+                                                <tr>
+                                                    <td>
                                                         @question.Title
-                                                </li>
-                                            </ul>
-                                    }
-                                }
-                                </div>
+                                                    </td>
+                                                    <td>
+                                                        <a href="EditQuestion/@question.QuestionaireID" @onclick="(() => editQuestion(question.QuestionID))">
+                                                            <img src="iCONS/edit_FILL0_wght400_GRAD0_opsz48.png" width="32" height="32" />
+                                                        </a>
+                                                    </td>
+                                                    <td>
+                                                        <a>
+                                                            <img src="iCONS/delete_FILL0_wght400_GRAD0_opsz48.png" width="32" height="32" />
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                            }
+                                        }
+                                        
+                                    </tbody>
+                                </table>
                             </div>
-                        }
-                    }
-                    
-            </div>
+
+                        </div>
+                        
+                     }
+                 }
             </div>
         </div>
 

@@ -26,16 +26,14 @@
                                     <MudItem Class="input-group mb-3">
                                         <input type="text" class="form-control" placeholder="Questionaire Title" aria-label="Question" aria-describedby="basic-addon2">
                                         <MudItem class="input-group-append">
-                                                <button class="btn btn-primary" type="button">Update Questionaire</button>
+                                                <button class="btn btn-success" type="button">Update Questionaire</button>
                                         </MudItem>
                                     </MudItem>
                                      <br>
                                     <MudItem class="input-group mb-3">
-                                        <MudTextField Label="Question" Class="form-control" Variant="Variant.Outlined"
-                                        @bind-Value="createQuestionDTO.Title" For="@(() => createQuestionDTO.Title)"
-                                                      Placeholder="Question" />
+                                        <input type="text" class="form-control" placeholder="Question Title" aria-label="Question" aria-describedby="basic-addon2" @bind-value="createQuestionDTO.Title">
                                         <MudItem class="input-group-append">
-                                            <button class="btn btn-primary" type="button" @onclick="CreateQuestion">Add Question</button>
+                                            <button class="btn btn-secondary" type="button" @onclick="CreateQuestion">Add Question</button>
                                         </MudItem>
                                      </MudItem>
                                 </MudCardContent>

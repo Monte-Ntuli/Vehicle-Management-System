@@ -28,10 +28,8 @@ namespace BlazorApp1.Server.Controllers
         [HttpPost("Create")]
         public async Task<IActionResult> Create([FromBody] CreateQuestionDTO question)
         {
-            
                 await _unitOfWork.Questions.AddAsync(_mapper.Map<QuestionsEntity>(question));
                 return Accepted(question);
-            
         }
         #endregion
 

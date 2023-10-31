@@ -53,9 +53,9 @@ namespace BlazorApp1.Client.Pages.Questionaires
             var username = login.Email.Replace("\"", string.Empty).Trim();
             var email = username.Replace("\'", string.Empty).Trim(new char[] { (char)39 });
             company = email.Replace("\'", string.Empty).Trim();
-            Questionaires = await QuestionaireService.GetQuestionaireByCompany(company);
-            Questions = await QuestionaireService.GetQuestionsByCompany(company);
+            Questionaires = await QuestionaireService.GetQuestionairesByCompany(company);
             VehicleTypes = await vehicleTypeService.GetVehicleTypeByCompany(company);
+            Questions = await QuestionaireService.GetQuestionsByQuestionaire(ID);
         }
         public async Task CreateQuestion()
         {
@@ -78,6 +78,7 @@ namespace BlazorApp1.Client.Pages.Questionaires
             else
             {
                 await QuestionaireService.CreateQuestionaire(createQuestionaireDTO);
+                Snackbar.Add("Questionaire Created Successfully", Severity.Success, config => { config.ShowCloseIcon = false; });
             }
         }
 
@@ -93,7 +94,7 @@ namespace BlazorApp1.Client.Pages.Questionaires
         protected override async Task OnParametersSetAsync()
         {
             Questionare = await QuestionaireService.GetQuestionaireByID(ID);
-            Question = await QuestionaireService.GetQuestionByQuestionaire(ID);
+            Questions = await QuestionaireService.GetQuestionsByQuestionaire(ID);
         }
 
         public async Task viewQuestionaire(int QuestionaireID)
@@ -103,6 +104,10 @@ namespace BlazorApp1.Client.Pages.Questionaires
         public async Task editQuestionaire(int QuestionaireID)
         {
             NavMan.NavigateTo($"EditQuestionaire/{QuestionaireID}");
+        }
+        public async Task editQuestion(int QuestionID)
+        {
+            NavMan.NavigateTo($"EditQuestion/{QuestionID}");
         }
 
         #region export data to an excel file
