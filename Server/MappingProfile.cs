@@ -57,6 +57,14 @@ namespace BlazorApp1.Server
             CreateMap<VehicleTypeEntity, CreateVehicleTypeDTO>().ReverseMap();
             CreateMap<VehicleTypeEntity, UpdateVehicleTypeDTO>().ReverseMap();
             #endregion
+
+            #region Answer Repository
+            CreateMap<AnswerEntity, AnswerModel>().ReverseMap();
+            #endregion
+
+            #region Report Repository
+            CreateMap<ReportEntity, ReportModel>().ReverseMap();
+            #endregion
         }
     }
 }

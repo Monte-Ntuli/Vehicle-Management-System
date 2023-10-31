@@ -1,6 +1,8 @@
 ﻿using BlazorApp1.Client.Repos;
 using BlazorApp1.Client.Repos.Interfaces;
 using BlazorApp1.Client.Services.Interfaces;
+using BlazorApp1.Server.Repos;
+using BlazorApp1.Server.Repos.Interfaces;
 
 namespace BlazorApp1.Client.Services
 {
@@ -79,5 +81,24 @@ namespace BlazorApp1.Client.Services
             }
         }
 
+        public IAnswerRepository _answer;
+        public IAnswerRepository Answer
+        {
+            get
+            {
+                if (_answer == null) { _answer = new AnswerRepository(_context); }
+                return _answer;
+            }
+        }
+
+        public IReportRepository _report;
+        public IReportRepository Report
+        {
+            get
+            {
+                if (_report == null) { _report = new ReportRepository(_context); }
+                return _report;
+            }
+        }
     }
 }
