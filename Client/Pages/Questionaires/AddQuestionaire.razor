@@ -29,7 +29,7 @@
                                     <MudItem Class="form-group col-md-8">
                                         <label for="VehicleTypeQuestionaire">Vehicle Type</label>
                                         <select id="VehicleTypeQuestionaire" class="form-control" @bind="createQuestionaireDTO.VehicleTypeID" @onclick="AddVehicleType">
-
+                                            <option value="0">select</option>
                                             @foreach (var type in VehicleTypes)
                                             {
                                                 if (type.hasQuestionaire == false)

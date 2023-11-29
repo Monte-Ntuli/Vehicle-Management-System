@@ -47,7 +47,7 @@ namespace BlazorApp1.Client.Pages.Reports
             var username = login.Email.Replace("\"", string.Empty).Trim();
             var email = username.Replace("\'", string.Empty).Trim(new char[] { (char)39 });
             company = email.Replace("\'", string.Empty).Trim();
-            Questionaires = await QuestionaireService.GetQuestionaireByCompany(company);
+            Questionaires = await QuestionaireService.GetQuestionairesByCompany(company);
             VehicleTypes = await vehicleTypeService.GetVehicleTypeByCompany(company);
             Vehicles = await VehicleService.GetVehicleByCompany(company);
             VehicleModelTypes = await vehicleModelTypeService.GetVehicleModelTypeByCompany(company);

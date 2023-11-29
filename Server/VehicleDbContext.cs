@@ -14,6 +14,8 @@ namespace BlazorApp1
         public virtual DbSet<VehicleEntity> Vehicles { get; set; }
         public virtual DbSet<QuestionsEntity> Questions { get; set; }
         public virtual DbSet<VehicleMakeEntity> VehicleMake { get; set; }
+        public virtual DbSet<AnswerEntity> Answers { get; set; }
+        public virtual DbSet<ReportEntity> Reports { get; set; }
         public VehicleDbContext(DbContextOptions options) : base(options) { }
         protected override void OnModelCreating(ModelBuilder builder)
         {

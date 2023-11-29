@@ -10,11 +10,13 @@ namespace BlazorApp1.Client.Services
     public class VehicleService : IVehicleService
     {
         [Inject]
-        public ISnackbar Snackbar { get; set; }
+        public ISnackbar Snackbar { get; set; } 
         private readonly HttpClient _httpClient;
-
+        public CreateVehicleDTO createVehicle {  get; set; } = new CreateVehicleDTO();
         public List<VehicleDTO> Vehicles { get; set; } = new List<VehicleDTO>();
-        public List<CreateVehicleDTO> creates { get; set; } = new List<CreateVehicleDTO>();
+        public VehicleDTO VehicleDTO { get; set; } = new VehicleDTO();
+        public CreateVehicleDTO creates { get; set; } = new CreateVehicleDTO();
+        public HttpResponseMessage ApiResult { get; set; } = new HttpResponseMessage();
         public VehicleService(HttpClient httpClient)
         {
             _httpClient = httpClient;
@@ -35,9 +37,8 @@ namespace BlazorApp1.Client.Services
             var result = await _httpClient.PostAsJsonAsync("api/Vehicles/Create", createVehicleDTO);
             if (result.StatusCode == System.Net.HttpStatusCode.Accepted)
             {
-                var response = await result.Content.ReadFromJsonAsync<List<VehicleDTO>>();
-                Snackbar.Add("Vehicle created sucessfully", Severity.Success, config => { config.ShowCloseIcon = false; });
-                Vehicles = response;
+                var response = await result.Content.ReadFromJsonAsync<CreateVehicleDTO>();
+                creates = response;
             }
             else
             {

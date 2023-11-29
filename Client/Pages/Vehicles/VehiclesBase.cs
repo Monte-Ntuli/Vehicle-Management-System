@@ -46,11 +46,8 @@ namespace BlazorApp1.Client.Pages.Vehicles
         public IEnumerable<VehicleTypeDTO> VehicleTypes { get; set; } = new List<VehicleTypeDTO>();
         public IEnumerable<VehicleMakeDTO> VehicleMake { get; set; } = new List<VehicleMakeDTO>();
         public IEnumerable<VehicleDTO> Vehicle { get; set; } = new List<VehicleDTO>();
-        public HttpResponseMessage ApiResult { get; set; }
-
-        public CreateVehicleDTO CreateVehicle = new CreateVehicleDTO();
-
-        public UpdateVehicleDTO updateVehicle = new UpdateVehicleDTO();
+        public CreateVehicleDTO CreateVehicle { get; set; }  = new CreateVehicleDTO();
+        public UpdateVehicleDTO updateVehicle { get; set; }  = new UpdateVehicleDTO();
         public LoginDTO login { get; set; } = new LoginDTO();
         protected override async Task OnInitializedAsync()
         {

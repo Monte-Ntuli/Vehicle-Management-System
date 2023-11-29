@@ -45,7 +45,7 @@ namespace BlazorApp1.Client.Pages.VehicleTypes
             var email = username.Replace("\'", string.Empty).Trim(new char[] { (char)39 });
             company = email.Replace("\'", string.Empty).Trim();
             VehicleTypes = await vehicleTypeService.GetVehicleTypeByCompany(company);
-            Questionaires = await QuestionaireService.GetQuestionaireByCompany(company);
+            Questionaires = await QuestionaireService.GetQuestionairesByCompany(company);
         }
 
         public async void AddVehicleType()
