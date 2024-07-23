@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Org.BouncyCastle.Asn1.Cmp;
 using System.Text;
+using BlazorApp1.Client;
 
 namespace BlazorApp1.Server
 {
@@ -26,6 +27,8 @@ namespace BlazorApp1.Server
             services.AddControllersWithViews();
             services.AddRazorPages();
 
+            services.AddRazorComponents().AddInteractiveServerComponents();
+            
             services.Configure<JwtConfig>(Configuration.GetSection("JwtConfig"));
 
             services.AddServerSideBlazor();
@@ -84,6 +87,9 @@ namespace BlazorApp1.Server
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
+            app.UseAntiforgery();
+            app.MapRazorComponents<App>().AddInteractiveServerRenderMode();
 
             app.UseHttpsRedirection();
 
