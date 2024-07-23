@@ -17,16 +17,16 @@ namespace BlazorApp1.Client
             builder.RootComponents.Add<App>("#app");
             builder.RootComponents.Add<HeadOutlet>("head::after");
 
+            builder.Services.AddSingleton<IEmployeeService, EmployeeService>();
+            builder.Services.AddSingleton<IAccountService, AccountService>();
+            builder.Services.AddSingleton<IQuestionaireService, QuestionaireService>();
+            builder.Services.AddSingleton<IQuestionsService, QuestionsService>();
+            builder.Services.AddSingleton<IVehicleService, VehicleService>();
+            builder.Services.AddSingleton<IVehicleTypeService, VehicleTypeService>();
+            builder.Services.AddSingleton<IVehicleMakeService, VehicleMakeService>();
+
             builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
-
-            builder.Services.AddScoped<IEmployeeService, EmployeeService>();
-            builder.Services.AddScoped<IAccountService, AccountService>();
-            builder.Services.AddScoped<IQuestionaireService, QuestionaireService>();
-            builder.Services.AddScoped<IQuestionsService, QuestionsService>();
-            builder.Services.AddScoped<IVehicleService, VehicleService>();
-            builder.Services.AddScoped<IVehicleTypeService, VehicleTypeService>();
-            builder.Services.AddScoped<IVehicleMakeService, VehicleMakeService>();
-
+            
             builder.Services.AddBlazoredLocalStorage();
             builder.Services.AddMudServices();
 

@@ -52,7 +52,7 @@ namespace BlazorApp1.Server
             //    c.SwaggerDoc("v1", new OpenApiInfo { Title = "projectBackend", Version = "v1" });
             //});
 
-            services.AddAutoMapper(typeof(MappingProfile));
+            //services.AddAutoMapper(typeof(MappingProfile));
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
@@ -88,9 +88,6 @@ namespace BlazorApp1.Server
                 app.UseHsts();
             }
 
-            app.UseAntiforgery();
-            app.MapRazorComponents<App>().AddInteractiveServerRenderMode();
-
             app.UseHttpsRedirection();
 
             app.UseBlazorFrameworkFiles();
@@ -98,6 +95,8 @@ namespace BlazorApp1.Server
 
             app.UseRouting();
 
+            app.UseAntiforgery();
+            app.MapRazorComponents<App>().AddInteractiveServerRenderMode();
 
             app.MapRazorPages();
             app.MapControllers();
